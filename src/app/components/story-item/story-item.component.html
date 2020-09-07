@@ -1,0 +1,15 @@
+<mat-card [ngStyle]="{ backgroundColor: this.colorMap[this.story.size] }">
+  <div class="vertically-centered">
+    <button mat-icon-button>
+      <mat-icon [svgIcon]="story.priority"></mat-icon>
+    </button>
+
+    <div>{{ story.name }}</div>
+
+    <div class="chip pull-right">
+      {{ story.status }}
+    </div>
+
+    <div class="pad-left">{{ story.id | storyId }}</div>
+  </div>
+</mat-card>

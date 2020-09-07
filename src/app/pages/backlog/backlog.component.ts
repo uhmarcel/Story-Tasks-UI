@@ -12,6 +12,8 @@ import {StoryItem} from '../../models/types';
 })
 export class BacklogComponent {
 
+  // TODO: Create id pipe -> ST-0001
+
   public readonly $storyList = this.apiService.getStoryItems();
 
   constructor(

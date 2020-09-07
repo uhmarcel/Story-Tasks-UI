@@ -2,3 +2,27 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Common styles
+.pull-right {
+  margin-left: auto;
+}
+
+.image-icon {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.vertically-centered {
+  display: flex;
+  align-items: center;
+}
+
+.pad-left {
+  padding-left: 16px;
+}
+
+.pad-right {
+  padding-right: 16px;
+}

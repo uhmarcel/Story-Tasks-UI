@@ -9,13 +9,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BoardComponent } from './pages/board/board.component';
 import { StoryEditorDialogComponent } from './components/dialogs/story-editor-dialog/story-editor-dialog.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { StoryItemComponent } from './components/story-item/story-item.component';
+import { StoryIdPipe } from './pipes/story-id/story-id.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     BacklogComponent,
     BoardComponent,
-    StoryEditorDialogComponent
+    StoryEditorDialogComponent,
+    NavBarComponent,
+    StoryItemComponent,
+    StoryIdPipe
   ],
   imports: [
     BrowserModule,
