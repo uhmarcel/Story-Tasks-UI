@@ -1,0 +1,29 @@
+<mat-selection-list role="list">
+
+  <ng-container *ngFor="let story of ($storyList | async)">
+    <mat-list-item role="listitem">
+      <div class="two-columns">
+        <div>{{ story.name + ' - ' + story.description }}</div>
+        <div>{{ 'ST-' + story.id.toString().padStart(4, '0') }}</div>
+      </div>
+    </mat-list-item>
+
+    <mat-list-option role="listitem" *ngFor="let childId of story.children">
+      <div mat-line>{{ 'ST-' + childId.toString().padStart(4, '0') }}</div>
+    </mat-list-option>
+
+    <mat-list-option role="listitem" *ngFor="let task of story.tasks">
+      <div mat-line>{{ task.label }}</div>
+    </mat-list-option>
+
+    <mat-divider></mat-divider>
+  </ng-container>
+
+  <mat-list-item>
+    <button mat-stroked-button color="primary" (click)="openStoryEditorDialog()">
+      Create Story
+    </button>
+  </mat-list-item>
+
+</mat-selection-list>
+

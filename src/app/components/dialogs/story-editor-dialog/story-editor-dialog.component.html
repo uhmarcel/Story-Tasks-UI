@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>Create story</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <form [formGroup]="storyForm">
+    <mat-form-field [appearance]="appearance">
+      <mat-label>Story ID</mat-label>
+      <input matInput type="text" formControlName="id">
+      <mat-error *ngIf="storyForm.get('id').invalid">Please enter a valid id</mat-error>
+    </mat-form-field>
+
+    <mat-form-field [appearance]="appearance">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name">
+      <mat-error *ngIf="storyForm.get('name').invalid">Please enter a valid name</mat-error>
+    </mat-form-field>
+
+    <mat-form-field [appearance]="appearance">
+      <mat-label>Description</mat-label>
+      <input matInput type="text" formControlName="description">
+      <mat-error *ngIf="storyForm.get('description').invalid">Please enter a valid description</mat-error>
+    </mat-form-field>
+
+    <mat-form-field [appearance]="appearance">
+      <mat-label>Priority</mat-label>
+      <mat-select formControlName="priority">
+        <ng-container *ngFor="let priority of priorities">
+          <mat-option value="{{ priority }}">{{ priority }}</mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="storyForm.get('priority').invalid">Please choose a priority</mat-error>
+    </mat-form-field>
+
+    <mat-form-field [appearance]="appearance">
+      <mat-label>Size</mat-label>
+      <mat-select formControlName="size">
+        <ng-container *ngFor="let size of sizes">
+          <mat-option value="{{ size }}">{{ size }}</mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="storyForm.get('size').invalid">Please choose a size</mat-error>
+    </mat-form-field>
+
+    <mat-form-field [appearance]="appearance">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <ng-container *ngFor="let status of statuses">
+          <mat-option value="{{ status }}">{{ status }}</mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="storyForm.get('status').invalid">Please choose a status</mat-error>
+    </mat-form-field>
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-stroked-button cdkFocusInitial
+    color="primary"
+    [disabled]="storyForm.invalid"
+    [mat-dialog-close]="storyForm.value">
+    Create
+  </button>
+</mat-dialog-actions>
