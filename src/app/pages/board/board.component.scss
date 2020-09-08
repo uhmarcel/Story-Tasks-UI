@@ -1,0 +1,15 @@
+.list-item {
+  margin: 4px;
+  padding-bottom: 1px;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+
+  .column {
+    flex: 1;
+  }
+
+}
