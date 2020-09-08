@@ -24,7 +24,7 @@
     <mat-form-field [appearance]="appearance">
       <mat-label>Priority</mat-label>
       <mat-select formControlName="priority">
-        <ng-container *ngFor="let priority of priorities">
+        <ng-container *ngFor="let priority of typeKeys.priorities">
           <mat-option value="{{ priority }}">{{ priority }}</mat-option>
         </ng-container>
       </mat-select>
@@ -34,7 +34,7 @@
     <mat-form-field [appearance]="appearance">
       <mat-label>Size</mat-label>
       <mat-select formControlName="size">
-        <ng-container *ngFor="let size of sizes">
+        <ng-container *ngFor="let size of typeKeys.sizes">
           <mat-option value="{{ size }}">{{ size }}</mat-option>
         </ng-container>
       </mat-select>
@@ -44,7 +44,7 @@
     <mat-form-field [appearance]="appearance">
       <mat-label>Status</mat-label>
       <mat-select formControlName="status">
-        <ng-container *ngFor="let status of statuses">
+        <ng-container *ngFor="let status of typeKeys.statuses">
           <mat-option value="{{ status }}">{{ status }}</mat-option>
         </ng-container>
       </mat-select>

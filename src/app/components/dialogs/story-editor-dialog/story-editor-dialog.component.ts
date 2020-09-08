@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {typeKeys} from '../../../models/types';
 
 @Component({
   selector: 'app-create-story-dialog',
@@ -9,11 +10,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class StoryEditorDialogComponent {
 
-  public readonly priorities = ['BLOCKER', 'CRITICAL', 'VERY_HIGH', 'HIGH', 'MEDIUM', 'LOW', 'VERY_LOW', 'OPTIONAL'];
-  public readonly sizes = ['XXL', 'XL', 'L', 'M', 'S'];
-  public readonly statuses = ['ANALYSIS', 'TODO', 'IN_PROGRESS', 'DONE'];
-
   public readonly appearance = 'outline';
+  public readonly typeKeys = typeKeys;
 
   public storyForm: FormGroup;
 
@@ -21,13 +19,36 @@ export class StoryEditorDialogComponent {
     private readonly dialogRef: MatDialogRef<StoryEditorDialogComponent>,
     private readonly formBuilder: FormBuilder
   ) {
+
+    const validInteger: ValidatorFn = (control: AbstractControl) =>
+      !Number.isInteger(Number(control.value))
+        ? { invalidInteger: control.value } as ValidationErrors
+        : null;
+
     this.storyForm = formBuilder.group({
-      id : [null, Validators.compose([Validators.required, Validators.min(0), Validators.max(9999)])],
-      name : [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(80)])],
-      description : [null, Validators.maxLength(255)],
-      priority : [null, Validators.required],
-      size: [null, Validators.required],
-      status: [null, Validators.required]
+      id: [null, [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(9999),
+        validInteger
+      ]],
+      name: [null, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(80)
+      ]],
+      description: [null,
+        Validators.maxLength(255)
+      ],
+      priority: [null,
+        Validators.required
+      ],
+      size: [null,
+        Validators.required
+      ],
+      status: [null,
+        Validators.required
+      ]
     });
   }
 }

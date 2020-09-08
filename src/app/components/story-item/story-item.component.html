@@ -4,12 +4,12 @@
       <mat-icon [svgIcon]="story.priority"></mat-icon>
     </button>
 
-    <div>{{ story.name }}</div>
+    <span class="pad-left story-title" style="font-weight: bold">{{ story.name }}</span>
 
     <div class="chip pull-right">
       {{ story.status }}
     </div>
 
-    <div class="pad-left">{{ story.id | storyId }}</div>
+    <div class="pad-left mat-small story-id" >{{ story.id | storyId }}</div>
   </div>
 </mat-card>
