@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  backendHostUrl: 'http://localhost:8080',
+  backendHostUrl: 'https://story-tasks-api.herokuapp.com',
+  baseHref: '/',
 };
