@@ -5,10 +5,8 @@ import {BacklogComponent} from './pages/backlog/backlog.component';
 // TODO: Add lazy loading
 
 const routes: Routes = [
-  {
-    path: 'backlog',
-    component: BacklogComponent
-  }
+  { path: '', redirectTo: 'backlog', pathMatch: 'full' },
+  { path: 'backlog', component: BacklogComponent }
 ];
 
 @NgModule({
