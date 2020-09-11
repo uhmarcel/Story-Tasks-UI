@@ -28,3 +28,14 @@ export const selectStoryItemsByStatus = () => createSelector(
   (stories, props) => stories.filter(story => story.status === props.status)
 );
 
+export const selectStoryItemById = createSelector(
+  selectStoryEntities,
+  (entities, props) => entities[props.id]
+);
+
+export const selectStoryItemsById = createSelector(
+  selectStoryEntities,
+  (entities, props) => props.ids.map(id => entities[id])
+);
+
+

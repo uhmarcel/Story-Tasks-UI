@@ -55,7 +55,7 @@
     </div>
 
     <ng-template matExpansionPanelContent *ngIf="story.children && story.children.length > 0">
-      <app-story-list [storyList]="[story]"></app-story-list>
+      <app-story-list [storyList]="childStories$ | async"></app-story-list>
     </ng-template>
 
   </mat-expansion-panel>

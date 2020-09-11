@@ -49,6 +49,16 @@ export class StoryEffects {
     )
   );
 
+  // loadItemsById$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(StoryActions.loadStoryItemsById),
+  //     concatMap(action => of(action).pipe(
+  //       withLatestFrom(this.store.pipe(select(StorySelectors.selectStoryIds)))
+  //     )),
+  //     map(([action, existingIds]) => action.ids.filter(id => !existingIds.includes(id)))
+  //   ), { dispatch: false }
+  // );
+
   constructor(
     private readonly actions$: Actions,
     private readonly apiService: ApiService,
