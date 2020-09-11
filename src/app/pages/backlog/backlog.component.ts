@@ -2,9 +2,12 @@ import { Component } from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {MatDialog} from '@angular/material/dialog';
 import {StoryEditorDialogComponent} from '../../components/dialogs/story-editor-dialog/story-editor-dialog.component';
-import {filter, map, switchMap} from 'rxjs/operators';
+import {filter, first, map, switchMap, tap} from 'rxjs/operators';
 import {keyValue, StoryItem} from '../../models/types';
 import {generateMockStory} from '../../util/generate-data';
+import {select, Store} from '@ngrx/store';
+import {StorySelectors} from '../../store/selectors';
+import {StoryActions} from '../../store/actions';
 
 @Component({
   selector: 'app-backlog',
@@ -13,44 +16,29 @@ import {generateMockStory} from '../../util/generate-data';
 })
 export class BacklogComponent {
 
-  public readonly $storyList = this.apiService.getStoryItems();
-    // .pipe(
-    //   map(stories => stories
-    //     .sort((a, b) =>
-    //       keyValue.priorities[a.priority] - keyValue.priorities[b.priority]
-    //     )
-    //   )
-    // );
+  public ids: number[] = [];
+
+  public readonly storyItems$ = this.store.pipe(select(StorySelectors.selectAllStoryItems));
 
   constructor(
+    private readonly store: Store,
     private readonly apiService: ApiService,
     public dialog: MatDialog
-  ) {}
+  ) {
+    this.store.dispatch(StoryActions.loadStoryItems());
+  }
 
   openStoryEditorDialog() {
     const dialogRef = this.dialog.open(StoryEditorDialogComponent);
 
     dialogRef.afterClosed().pipe(
       filter(result => result),
-      switchMap(story => this.apiService.createStoryItem(story as StoryItem)),
-    ).subscribe();
+      first()
+    ).subscribe(story => this.store.dispatch(StoryActions.createStoryItem({ storyItem: story })));
   }
 
   generateRandomStory() {
-    this.$storyList.pipe(
-      map(stories => {
-        const set = new Set<number>();
-        stories.forEach(story => set.add(story.id));
-        for (let i = 0; i < stories.length; i++) {
-          if (!set.has(i)) {
-            return i;
-          }
-        }
-        return stories.length;
-      }),
-      map(id => generateMockStory(id)),
-      switchMap(story => this.apiService.createStoryItem(story))
-    ).subscribe(story => window.location.reload());
+    this.store.dispatch(StoryActions.generateMockStory());
   }
 
 }

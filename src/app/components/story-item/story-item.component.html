@@ -1,15 +1,77 @@
-<mat-card [ngStyle]="{ backgroundColor: this.colorMap[this.story.size] }">
-  <div class="vertically-centered">
-    <button mat-icon-button>
-      <mat-icon [svgIcon]="story.priority"></mat-icon>
-    </button>
+<!--<mat-card-->
+<!--  class="story-item-container"-->
+<!--  [ngStyle]="{ backgroundColor: this.colorMap[this.story.size] }"-->
+<!--  (click)="toggleStory()"-->
+<!--&gt;-->
+<!--  <div class="vertically-centered">-->
+<!--    <button mat-icon-button>-->
+<!--      <mat-icon [svgIcon]="story.priority"></mat-icon>-->
+<!--    </button>-->
 
-    <span class="pad-left story-title" style="font-weight: bold">{{ story.name }}</span>
+<!--    <span class="pad-left story-title" style="font-weight: bold">{{ story.name }}</span>-->
 
-    <div class="chip pull-right">
-      {{ story.status }}
+<!--    <span class="pull-right"></span>-->
+
+<!--    <ng-container *ngIf="showStatus">-->
+<!--      <div class="chip">-->
+<!--        {{ story.status }}-->
+<!--      </div>-->
+<!--    </ng-container>-->
+
+<!--    <div class="pad-left mat-small story-id" >{{ story.id | storyId }}</div>-->
+<!--  </div>-->
+<!--  -->
+<!--</mat-card>-->
+
+
+  <mat-expansion-panel
+    [ngStyle]="{ backgroundColor: this.colorMap[this.story.size] }"
+    hideToggle>
+
+    <mat-expansion-panel-header>
+      <div class="story-summary-container">
+        <button mat-icon-button>
+          <mat-icon [svgIcon]="story.priority"></mat-icon>
+        </button>
+
+        <span class="pad-left story-title" style="font-weight: bold">
+          {{ story.name }}
+        </span>
+
+        <span class="pull-right"></span>
+
+        <div class="chip" *ngIf="showStatus">
+          {{ story.status }}
+        </div>
+
+        <div class="pad-left mat-small story-id" >
+          {{ story.id | storyId }}
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div>
+      {{ story.description }}
     </div>
 
-    <div class="pad-left mat-small story-id" >{{ story.id | storyId }}</div>
-  </div>
-</mat-card>
+    <ng-template matExpansionPanelContent *ngIf="story.children && story.children.length > 0">
+      <app-story-list [storyList]="[story]"></app-story-list>
+    </ng-template>
+
+  </mat-expansion-panel>
+
+
+
+<!--  <mat-expansion-panel (opened)="panelOpenState = true"-->
+<!--                       (closed)="panelOpenState = false">-->
+<!--    <mat-expansion-panel-header>-->
+<!--      <mat-panel-title>-->
+<!--        Self aware panel-->
+<!--      </mat-panel-title>-->
+<!--      <mat-panel-description>-->
+<!--        Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+<!--      </mat-panel-description>-->
+<!--    </mat-expansion-panel-header>-->
+<!--    <p>I'm visible because I am open</p>-->
+<!--  </mat-expansion-panel>-->
+<!--</mat-accordion>-->

@@ -2,13 +2,7 @@
 
   <div class="column" *ngFor="let status of typeKeys.statuses">
 
-    <mat-list role="list">
-      <ng-container *ngFor="let story of storiesByStatus[status]">
-        <div class="list-item">
-          <app-story-item [story]="story"></app-story-item>
-        </div>
-      </ng-container>
-    </mat-list>
+    <app-story-list [storyList]="storiesByStatus[status]"></app-story-list>
 
   </div>
 

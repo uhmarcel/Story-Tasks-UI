@@ -10,9 +10,15 @@ import {colorMapping} from '../../util/color-mapping';
 })
 export class StoryItemComponent {
 
-  @Input() public story: StoryItem; // TODO: Change to story item state once store is in place
   public readonly colorMap = colorMapping;
+  public expanded = false;
+
+  @Input() public story: StoryItem; // TODO: Change to story item state once store is in place
+  @Input() public showStatus = true;
 
   constructor() {}
 
+  toggleStory() {
+    this.expanded = !this.expanded;
+  }
 }

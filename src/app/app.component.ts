@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Store} from '@ngrx/store';
+import {StoryState} from './store/reducers/story.reducer';
+import {loadStoryItems} from './store/actions/story.actions';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +17,16 @@ export class AppComponent {
 
   constructor(
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private store: Store<StoryState>
   ){
+    this.loadPriorityIcons();
+    // this.store.dispatch(loadStoryItems());
+    // console.log('dispatched');
+    // this.store.pipe(tap(console.log)).subscribe();
+  }
+
+  loadPriorityIcons() {
     const sanitize = (url: string) => this.domSanitizer.bypassSecurityTrustResourceUrl(url);
     this.matIconRegistry.addSvgIcon('BLOCKER', sanitize('./assets/priority/blocker.svg'));
     this.matIconRegistry.addSvgIcon('CRITICAL', sanitize('./assets/priority/critical.svg'));

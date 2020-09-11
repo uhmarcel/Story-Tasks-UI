@@ -1,4 +1,4 @@
-mat-card {
+.story-item-container {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 12px;
@@ -20,8 +20,22 @@ mat-card {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  min-width: 0px;
 }
 
 .story-id {
   white-space: nowrap;
 }
+
+mat-expansion-panel-header {
+  padding-left: 12px;
+  padding-right: 12px;
+
+  .story-summary-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+}
+

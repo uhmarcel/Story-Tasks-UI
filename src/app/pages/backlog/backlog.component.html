@@ -1,19 +1,10 @@
-<mat-list role="list">
+<app-story-list [storyList]="storyItems$ | async"></app-story-list>
 
-  <ng-container *ngFor="let story of ($storyList | async)">
-    <div class="list-item">
-      <app-story-item [story]="story"></app-story-item>
-    </div>
-  </ng-container>
-
-  <mat-list-item>
-    <button mat-stroked-button color="primary" (click)="openStoryEditorDialog()">
-      Create Story
-    </button>
-    <button mat-stroked-button color="secondary" (click)="generateRandomStory()">
-      Generate
-    </button>
-  </mat-list-item>
-
-</mat-list>
-
+<mat-list-item>
+  <button mat-stroked-button color="primary" (click)="openStoryEditorDialog()">
+    Create Story
+  </button>
+  <button mat-stroked-button color="secondary" (click)="generateRandomStory()">
+    Generate
+  </button>
+</mat-list-item>
