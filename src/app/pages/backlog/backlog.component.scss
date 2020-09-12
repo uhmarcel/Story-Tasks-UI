@@ -1,7 +1,3 @@
-mat-list-option {
-  width: calc(100% - 2rem) !important;
-  padding-left: 2rem !important;
-}
 
 .two-columns {
   display: flex;
@@ -12,4 +8,9 @@ mat-list-option {
 .list-item {
   margin: 4px;
   padding-bottom: 1px;
+}
+
+.list-container {
+  max-width: 1000px;
+  margin: 0 auto;
 }

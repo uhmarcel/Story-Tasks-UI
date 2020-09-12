@@ -1,4 +1,9 @@
-<app-story-list [storyList]="storyItems$ | async"></app-story-list>
+<div class="list-container">
+  <app-story-list
+    [storyList]="storyItems$ | async"
+    [showStatus]="true"
+  ></app-story-list>
+</div>
 
 <mat-list-item>
   <button mat-stroked-button color="primary" (click)="openStoryEditorDialog()">

@@ -18,6 +18,8 @@ export class StoryItemComponent implements OnInit {
   @Input() public showStatus = true;
 
   public childStories$: Observable<StoryItem[]>;
+  public isExpanded = false;
+
   public readonly colorMap = colorMapping;
 
   constructor(private readonly store: Store) {}

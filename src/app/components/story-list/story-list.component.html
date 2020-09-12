@@ -1,11 +1,10 @@
-<mat-accordion role="list">
+<mat-accordion multi role="list">
 
   <ng-container *ngFor="let story of storyList">
-
-<!--    <div class="list-item">-->
-      <app-story-item [story]="story"></app-story-item>
-<!--    </div>-->
-
+      <app-story-item
+        [story]="story"
+        [showStatus]="showStatus"
+      ></app-story-item>
   </ng-container>
 
 </mat-accordion>

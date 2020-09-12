@@ -1,77 +1,59 @@
-<!--<mat-card-->
-<!--  class="story-item-container"-->
-<!--  [ngStyle]="{ backgroundColor: this.colorMap[this.story.size] }"-->
-<!--  (click)="toggleStory()"-->
-<!--&gt;-->
-<!--  <div class="vertically-centered">-->
-<!--    <button mat-icon-button>-->
-<!--      <mat-icon [svgIcon]="story.priority"></mat-icon>-->
-<!--    </button>-->
+<mat-expansion-panel
+  (opened)="isExpanded = true"
+  (closed)="isExpanded = false"
+  [ngClass]="{ collapsed: !isExpanded }"
+  hideToggle>
+  <!--  [ngStyle]="{ backgroundColor: this.colorMap[this.story.size] }"-->
 
-<!--    <span class="pad-left story-title" style="font-weight: bold">{{ story.name }}</span>-->
+  <mat-expansion-panel-header>
+    <div class="story-summary-container">
+      <button mat-icon-button>
+        <mat-icon [svgIcon]="story.priority"></mat-icon>
+      </button>
 
-<!--    <span class="pull-right"></span>-->
+      <span class="pad-left story-title" [ngClass]="{ completed: story.status === 'DONE'}">
+        {{ story.name }}
+      </span>
 
-<!--    <ng-container *ngIf="showStatus">-->
-<!--      <div class="chip">-->
-<!--        {{ story.status }}-->
-<!--      </div>-->
-<!--    </ng-container>-->
+      <span class="pull-right"></span>
 
-<!--    <div class="pad-left mat-small story-id" >{{ story.id | storyId }}</div>-->
-<!--  </div>-->
-<!--  -->
-<!--</mat-card>-->
-
-
-  <mat-expansion-panel
-    [ngStyle]="{ backgroundColor: this.colorMap[this.story.size] }"
-    hideToggle>
-
-    <mat-expansion-panel-header>
-      <div class="story-summary-container">
-        <button mat-icon-button>
-          <mat-icon [svgIcon]="story.priority"></mat-icon>
-        </button>
-
-        <span class="pad-left story-title" style="font-weight: bold">
-          {{ story.name }}
-        </span>
-
-        <span class="pull-right"></span>
-
-        <div class="chip" *ngIf="showStatus">
-          {{ story.status }}
-        </div>
-
-        <div class="pad-left mat-small story-id" >
-          {{ story.id | storyId }}
-        </div>
+      <div class="chip" *ngIf="showStatus">
+        {{ story.status }}
       </div>
-    </mat-expansion-panel-header>
 
-    <div>
-      {{ story.description }}
+      <div class="pad-left mat-small story-id" >
+        {{ story.id | storyId }}
+      </div>
+    </div>
+  </mat-expansion-panel-header>
+
+
+  <ng-template matExpansionPanelContent>
+
+    <div class="story-details-container">
+      <div class="story-details-description" *ngIf="story.description">
+        {{ story.description }}
+      </div>
+
+      <div class="story-details-tasks" *ngIf="story.tasks && story.tasks.length > 0">
+        <mat-selection-list>
+          <mat-list-option
+            *ngFor="let task of story.tasks"
+            [selected]="task.done">
+            <span [ngClass]="{ completed: task.done }">
+              {{ task.label }}
+            </span>
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+
+      <div class="story-details-children" *ngIf="story.children && story.children.length > 0">
+        <app-story-list
+          [storyList]="childStories$ | async"
+        ></app-story-list>
+      </div>
     </div>
 
-    <ng-template matExpansionPanelContent *ngIf="story.children && story.children.length > 0">
-      <app-story-list [storyList]="childStories$ | async"></app-story-list>
-    </ng-template>
+  </ng-template>
 
-  </mat-expansion-panel>
-
-
-
-<!--  <mat-expansion-panel (opened)="panelOpenState = true"-->
-<!--                       (closed)="panelOpenState = false">-->
-<!--    <mat-expansion-panel-header>-->
-<!--      <mat-panel-title>-->
-<!--        Self aware panel-->
-<!--      </mat-panel-title>-->
-<!--      <mat-panel-description>-->
-<!--        Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-<!--      </mat-panel-description>-->
-<!--    </mat-expansion-panel-header>-->
-<!--    <p>I'm visible because I am open</p>-->
-<!--  </mat-expansion-panel>-->
-<!--</mat-accordion>-->
+</mat-expansion-panel>

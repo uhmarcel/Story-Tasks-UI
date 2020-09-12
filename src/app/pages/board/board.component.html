@@ -2,7 +2,10 @@
 
   <div class="column" *ngFor="let status of typeKeys.statuses">
 
-    <app-story-list [storyList]="storiesByStatus[status]"></app-story-list>
+    <app-story-list
+      [storyList]="storiesByStatus[status]"
+      [showStatus]="false"
+    ></app-story-list>
 
   </div>
 

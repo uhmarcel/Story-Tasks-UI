@@ -9,6 +9,7 @@ import {StoryItem} from '../../models/types';
 export class StoryListComponent {
 
   @Input() public readonly storyList: StoryItem[] = [];
+  @Input() public readonly showStatus = true;
 
   constructor() {}
 

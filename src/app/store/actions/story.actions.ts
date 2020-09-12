@@ -12,4 +12,3 @@ export const createStoryItemSuccess = createAction('[Story Item API] Create stor
 export const createStoryItemFailure = createAction('[Story Item API] Create story item FAILURE', props<{ error: any }>());
 
 export const generateMockStory = createAction('[Story Item DEBUG] Generate mock story');
-

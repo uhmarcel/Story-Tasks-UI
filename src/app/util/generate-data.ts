@@ -1,4 +1,4 @@
-import { StoryItem, typeKeys} from '../models/types';
+import { StoryItem, typeKeys, Task} from '../models/types';
 import * as faker from 'faker';
 
 
@@ -6,9 +6,9 @@ export function generateMockStory(id: number, idPool: number[] = []): StoryItem 
  return {
    id: id ? id : getNextAvailableId(idPool),
    name: faker.name.title(),
-   description: faker.company.catchPhraseDescriptor(),
-   children: pickMany(idPool, 5),
-   tasks: [],
+   description: faker.lorem.paragraph(),
+   children: pickMany(idPool, 4),
+   tasks: generateTasks(4),
    priority: pickOne(typeKeys.priorities),
    size: pickOne(typeKeys.sizes),
    status: pickOne(typeKeys.statuses),
@@ -33,7 +33,7 @@ function pickMany<T>(array: T[], max: number = array.length): number[] {
   return children;
 }
 
-function  getNextAvailableId(idPool: number[]) {
+function  getNextAvailableId(idPool: number[]): number {
   const set = new Set<number>(idPool);
   for (let candidate = 0; candidate < idPool.length; candidate++) {
     if (!set.has(candidate)) {
@@ -41,4 +41,17 @@ function  getNextAvailableId(idPool: number[]) {
     }
   }
   return idPool.length;
+}
+
+function generateTasks(max: number): Task[] {
+  const amount = Math.floor(Math.random() * (max + 1));
+  const tasks: Task[] = [];
+
+  for (let i = 0; i < amount; i++) {
+    tasks.push({
+      label: faker.lorem.sentence(),
+      done: Math.random() < 0.33,
+    });
+  }
+  return tasks;
 }
