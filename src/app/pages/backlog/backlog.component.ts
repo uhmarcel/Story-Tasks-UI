@@ -3,7 +3,7 @@ import {ApiService} from '../../services/api.service';
 import {MatDialog} from '@angular/material/dialog';
 import {StoryEditorDialogComponent} from '../../components/dialogs/story-editor-dialog/story-editor-dialog.component';
 import {filter, first, map, switchMap, tap} from 'rxjs/operators';
-import {keyValue, StoryItem} from '../../models/types';
+import {keyValue, StoryItem, StoryItemParams} from '../../models/types';
 import {generateMockStory} from '../../util/generate-data';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../store/selectors';
@@ -18,14 +18,14 @@ export class BacklogComponent {
 
   public ids: number[] = [];
 
-  public readonly storyItems$ = this.store.pipe(select(StorySelectors.selectAllStoryItems));
+  public readonly storyIds$ = this.store.pipe(select(StorySelectors.selectStoryIds));
 
   constructor(
     private readonly store: Store,
-    private readonly apiService: ApiService,
     public dialog: MatDialog
   ) {
-    this.store.dispatch(StoryActions.loadStoryItems());
+    const params: StoryItemParams = { parent: -1 };
+    this.store.dispatch(StoryActions.loadStoryItems({ params }));
   }
 
   openStoryEditorDialog() {

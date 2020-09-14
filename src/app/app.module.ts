@@ -18,6 +18,8 @@ import { EffectsModule } from '@ngrx/effects';
 import {StoryEffects} from './store/effects/story.effects';
 import {applicationReducers} from './store/reducers';
 import {applicationEffects} from './store/effects';
+import {ReactiveComponentModule} from '@ngrx/component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import {applicationEffects} from './store/effects';
     NavBarComponent,
     StoryItemComponent,
     StoryIdPipe,
-    StoryListComponent
+    StoryListComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,9 @@ import {applicationEffects} from './store/effects';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    DragDropModule,
     ReactiveFormsModule,
+    ReactiveComponentModule,
     StoreModule.forRoot(applicationReducers),
     EffectsModule.forRoot(applicationEffects)
   ],

@@ -1,10 +1,9 @@
-<mat-accordion multi role="list">
-
-  <ng-container *ngFor="let story of storyList">
+<mat-accordion role="list" multi>
+  <ng-container *ngFor="let id of storyIDs">
       <app-story-item
-        [story]="story"
+        [storyID]="id"
         [showStatus]="showStatus"
+        cdkDrag
       ></app-story-item>
   </ng-container>
-
 </mat-accordion>

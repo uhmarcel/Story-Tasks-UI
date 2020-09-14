@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {first, map, tap} from 'rxjs/operators';
-import {keyValue, StoryItem, typeKeys} from '../../models/types';
+import {keyValue, Status, StoryItem, typeKeys} from '../../models/types';
+import {select, Store} from '@ngrx/store';
+import {StorySelectors} from '../../store/selectors';
+import {CdkDragDrop} from '@angular/cdk/drag-drop';
+import {StoryActions} from '../../store/actions';
 
 @Component({
   selector: 'app-board',
@@ -10,18 +14,28 @@ import {keyValue, StoryItem, typeKeys} from '../../models/types';
 })
 export class BoardComponent {
 
-  public readonly storiesByStatus: Record<string, StoryItem[]>;
-  public readonly typeKeys = typeKeys;
+  public readonly storiesByStatus$ = this.store.pipe(
+    select(StorySelectors.selectStoryIDsGroupByStatus),
+  );
 
-  constructor(private readonly apiService: ApiService) {
-    this.storiesByStatus = {};
-    typeKeys.statuses.forEach(status => this.storiesByStatus[status] = []);
+  public readonly STATUS_KEYS = Object.keys(Status);
 
-    this.apiService.getStoryItems().pipe(
-      map(stories => stories.sort((a, b) => keyValue.priorities[a.priority] - keyValue.priorities[b.priority])),
-      tap(stories => stories.forEach(story => this.storiesByStatus[story.status].push(story))),
+  constructor(private readonly store: Store) {
+    this.store.dispatch(StoryActions.loadStoryItems({}));
+  }
+
+  dropStory(event: CdkDragDrop<any>) {
+    const prevStatus = event.previousContainer.data;
+    const status = event.container.data;
+    const storyIndex = event.previousIndex;
+
+    this.storiesByStatus$.pipe(
+      map(storyIDs => storyIDs[prevStatus][storyIndex]),
       first()
-    ).subscribe();
+    ).subscribe(storyID => this.store.dispatch(
+      StoryActions.updateStoryStatus({ storyID, status }))
+    );
   }
 
 }
+

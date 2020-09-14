@@ -1,15 +1,25 @@
+
 export interface StoryItem {
   id: number;
-  name: string;
-  description: string;
+  parent: number;
   children: number[];
+  title: string;
+  description: string;
   tasks: Task[];
   priority: Priority;
   size: Size;
   status: Status;
 }
 
+export interface StoryItemParams {
+  parent?: number;
+  status?: Status;
+  priority?: Priority;
+  includeParent?: boolean;
+}
+
 export interface Task {
+  id?: string;
   label: string;
   done: boolean;
 }
@@ -18,9 +28,15 @@ export type Priority = 'BLOCKER' | 'CRITICAL' | 'VERY_HIGH' | 'HIGH' | 'MEDIUM' 
 
 export type Size = 'XXL' | 'XL' | 'L' | 'M' | 'S';
 
-export type Status = 'ANALYSIS' | 'TODO' | 'IN_PROGRESS' | 'DONE';
+export enum Status {
+  'ANALYSIS' = 'ANALYSIS',
+  'TODO' = 'TODO',
+  'IN_PROGRESS' = 'IN_PROGRESS',
+  'DONE' = 'DONE'
+}
 
 // Type metadata
+
 export const typeKeys = {
   priorities: ['BLOCKER', 'CRITICAL', 'VERY_HIGH', 'HIGH', 'MEDIUM', 'LOW', 'VERY_LOW', 'OPTIONAL'] as Priority[],
   sizes: ['XXL', 'XL', 'L', 'M', 'S'] as Size[],

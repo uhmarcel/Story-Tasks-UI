@@ -5,9 +5,10 @@ import * as faker from 'faker';
 export function generateMockStory(id: number, idPool: number[] = []): StoryItem {
  return {
    id: id ? id : getNextAvailableId(idPool),
-   name: faker.name.title(),
+   parent: pickParent(idPool),
+   children: [],
+   title: faker.name.title(),
    description: faker.lorem.paragraph(),
-   children: pickMany(idPool, 4),
    tasks: generateTasks(4),
    priority: pickOne(typeKeys.priorities),
    size: pickOne(typeKeys.sizes),
@@ -16,6 +17,8 @@ export function generateMockStory(id: number, idPool: number[] = []): StoryItem 
 }
 
 function pickOne<T>(array: T[]): T {
+  if (array.length === 0) { return null; }
+
   const size = array.length;
   const randomIndex = Math.floor(Math.random() * size);
   return array[randomIndex];
@@ -49,9 +52,18 @@ function generateTasks(max: number): Task[] {
 
   for (let i = 0; i < amount; i++) {
     tasks.push({
+      id: null,
       label: faker.lorem.sentence(),
       done: Math.random() < 0.33,
     });
   }
   return tasks;
+}
+
+function pickParent(idPool: number[]): number {
+  let parent = -1;
+  if (Math.random() > 0.5 && idPool.length > 0) {
+    parent = pickOne(idPool);
+  }
+  return parent;
 }

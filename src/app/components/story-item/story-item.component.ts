@@ -4,7 +4,10 @@ import {StoryIdPipe} from '../../pipes/story-id/story-id.pipe';
 import {colorMapping} from '../../util/color-mapping';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../store/selectors';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {distinctUntilChanged, filter, first, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
+import {StoryActions} from '../../store/actions';
+import {MatSelectionListChange} from '@angular/material/list';
 
 @Component({
   selector: 'app-story-item',
@@ -13,21 +16,44 @@ import {Observable} from 'rxjs';
 })
 export class StoryItemComponent implements OnInit {
 
+  @Input() public readonly storyID: number;
+  @Input() public readonly showStatus = true;
 
-  @Input() public story: StoryItem; // TODO: Change to story item state once store is in place
-  @Input() public showStatus = true;
+  public storyItem$: Observable<StoryItem>;
+  public expanded$: BehaviorSubject<boolean>;
 
-  public childStories$: Observable<StoryItem[]>;
-  public isExpanded = false;
-
-  public readonly colorMap = colorMapping;
+  // public readonly colorMap = colorMapping;
 
   constructor(private readonly store: Store) {}
 
   ngOnInit() {
-    // this.store.dispatch(loadStoryItemsById({ ids: story.children }));
-    this.childStories$ = this.store.pipe(select(StorySelectors.selectStoryItemsById, { ids: this.story.children }));
+    this.expanded$ = new BehaviorSubject<boolean>(false);
 
+    this.storyItem$ = this.store.pipe(
+      select(StorySelectors.selectStoryItemByID(this.storyID))
+    );
+
+    this.expanded$.pipe(
+      filter(expanded => expanded === true),
+      first()
+    ).subscribe(() =>
+      this.store.dispatch(StoryActions.loadStoryItemsByParentID({
+        parentID: this.storyID
+      }))
+    );
   }
 
+  onTaskChange(change: MatSelectionListChange) {
+    const done = change.option.selected;
+    const task = change.option.value;
+
+    setTimeout(() =>
+      this.store.dispatch(StoryActions.updateStoryTask({
+        storyID: this.storyID,
+        taskID: task.id,
+        task: { ...task, done }
+      })),
+      500
+    );
+  }
 }

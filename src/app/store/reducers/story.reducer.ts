@@ -38,10 +38,14 @@ export const storyReducer = createReducer<StoryState>(
     isLoading: false,
     error,
   })),
-  on(StoryActions.createStoryItemSuccess, (state, { storyItem }) => {
-    const nextState = storyAdapter.upsertOne(storyItem, state);
+  on(StoryActions.createStoryItemSuccess, (state, { storyItems }) => {
+    const nextState = storyAdapter.upsertMany(storyItems, state);
     return nextState;
-  })
+  }),
+  on(StoryActions.updateStoryItemSuccess, (state, { storyItems }) => {
+    const nextState = storyAdapter.upsertMany(storyItems, state);
+    return nextState;
+  }),
 );
 
 export const storyAdapterSelectors = storyAdapter.getSelectors();
