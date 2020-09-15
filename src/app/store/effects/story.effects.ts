@@ -2,8 +2,8 @@
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {ApiService} from '../../services/api.service';
 import {Injectable} from '@angular/core';
-import {catchError, concatMap, delay, filter, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {catchError, concatMap, delay, filter, map, mergeMap, switchMap, tap, withLatestFrom} from 'rxjs/operators';
+import {defer, of, throwError} from 'rxjs';
 import {StoryActions} from '../actions';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../selectors';
@@ -21,6 +21,15 @@ export class StoryEffects {
       })
     ), { dispatch: false }
   );
+
+  logError$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoryActions.updateStoryItemFailure),
+      tap(({error}) => alert(error))
+    ), { dispatch: false }
+  );
+
+  // TODO: BIG TIME!! Update to use MERGEMAP / CONCATMAP
 
 
   loadStories$ = createEffect(() =>
@@ -73,12 +82,27 @@ export class StoryEffects {
   updateStory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoryActions.updateStoryItem),
-      switchMap(({ storyItem }) => this.storyService.validateStoryItem(storyItem)),
-      switchMap(storyItem => this.apiService.updateStoryItem(storyItem)),
-      map(updatedStories => StoryActions.updateStoryItemSuccess({ storyItems: updatedStories })),
-      catchError(error => of(StoryActions.updateStoryItemFailure({ error })))
+      tap(x => console.log('1')),
+      mergeMap(({ storyItem }) => of(storyItem).pipe(
+        switchMap(story => this.storyService.validateStoryItem(story)),
+        switchMap(story => this.apiService.updateStoryItem(story)),
+        map(updatedStories => StoryActions.updateStoryItemSuccess({ storyItems: updatedStories })),
+        catchError(error => of(StoryActions.updateStoryItemFailure({ error })))
+      ))
     )
   );
+
+
+//
+// ,
+//       tap(x => console.log('2')),
+//       switchMap(storyItem => this.apiService.updateStoryItem(storyItem)),
+//       tap(x => console.log('3')),
+//       map(updatedStories => StoryActions.updateStoryItemSuccess({ storyItems: updatedStories })),
+//       tap(x => console.log('4')),
+//       catchError(error => of(StoryActions.updateStoryItemFailure({ error })))
+//     ),
+
 
   updateStoryStatus$  = createEffect(() =>
     this.actions$.pipe(
@@ -95,7 +119,7 @@ export class StoryEffects {
   updateStoryTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoryActions.updateStoryTask),
-      concatMap(action => of(action).pipe(
+      concatMap(action  => of(action).pipe(
         withLatestFrom(this.store.select(StorySelectors.selectStoryItemByID(action.storyID)))
       )),
       map(([{ task }, story]) => ({
@@ -130,3 +154,46 @@ export class StoryEffects {
     private readonly store: Store
   ) {}
 }
+
+
+/*
+  loadItems$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InboxActions.loadItemsByStatus),
+      concatMap((action) =>
+        of(action).pipe(
+          withLatestFrom(
+            this.store.select(getListItemParams),
+            this.store.select(selectFilterParams)
+          )
+        )
+      ),
+      mergeMap(([{ status }, itemParams, filterParams]) =>
+        forkJoin({
+          items: this.apiService.getListItems({
+            ...itemParams,
+            ...filterParams,
+            status,
+          }),
+          count: this.apiService.getItemCountByStatus(status as Status),
+        }).pipe(
+          mergeMap(({ items, count }) => [
+            InboxActions.updateCountByStatus({ count, status }),
+            InboxActions.loadItemsByStatusSuccess({ items, status }),
+          ]),
+          catchError((error) =>
+            of(
+              InboxActions.loadItemsByStatusFailure({
+                status,
+                error:
+                  error instanceof HttpErrorResponse && error.status === 401
+                    ? 'unauthorized'
+                    : 'list_error',
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+ */
