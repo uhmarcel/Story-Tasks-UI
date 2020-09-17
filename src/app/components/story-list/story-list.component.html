@@ -3,8 +3,9 @@
       <app-story-item
         [storyID]="id"
         [showStatus]="showStatus"
-        cdkDrag
         [cdkDragStartDelay]="0"
+        [cdkDragDisabled]="showStatus"
+        cdkDrag
       ></app-story-item>
   </ng-container>
 </mat-accordion>
