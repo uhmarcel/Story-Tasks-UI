@@ -2,13 +2,15 @@
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {ApiService} from '../../services/api.service';
 import {Injectable} from '@angular/core';
-import {catchError, concatMap, delay, filter, map, mergeMap, switchMap, tap, withLatestFrom} from 'rxjs/operators';
+import {catchError, concatMap, delay, filter, first, map, mergeMap, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 import {defer, of, throwError} from 'rxjs';
 import {StoryActions} from '../actions';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../selectors';
 import {generateMockStory} from '../../util/generate-data';
 import {StoryService} from '../../services/story.service';
+import {MatDialog} from '@angular/material/dialog';
+import {StoryEditorDialogComponent} from '../../components/dialogs/story-editor-dialog/story-editor-dialog.component';
 
 @Injectable()
 export class StoryEffects {
@@ -106,7 +108,7 @@ export class StoryEffects {
 
   updateStoryStatus$  = createEffect(() =>
     this.actions$.pipe(
-      ofType(StoryActions.updateStoryStatus),
+      ofType(StoryActions.updateStoryItemStatus),
       concatMap(action => of(action).pipe(
         withLatestFrom(this.store.select(StorySelectors.selectStoryItemByID(action.storyID)))
       )),
@@ -118,7 +120,7 @@ export class StoryEffects {
 
   updateStoryTask$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(StoryActions.updateStoryTask),
+      ofType(StoryActions.updateStoryItemTask),
       concatMap(action  => of(action).pipe(
         withLatestFrom(this.store.select(StorySelectors.selectStoryItemByID(action.storyID)))
       )),
@@ -132,7 +134,8 @@ export class StoryEffects {
   );
 
 
-  // TODO: Move from store
+  // TODO: Move / allocate - debug
+
   generateMockStory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoryActions.generateMockStory),
@@ -145,13 +148,27 @@ export class StoryEffects {
     )
   );
 
-
+  openStoryEditor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoryActions.openStoryEditor),
+      mergeMap(({ storyItem }) => of(storyItem).pipe(
+        switchMap(story => this.dialog.open(StoryEditorDialogComponent, { data: story }).afterClosed()),
+        switchMap(editedStory => this.storyService.validateStoryItem(editedStory)),
+        map(editedStory => editedStory
+          ? StoryActions.createStoryItem({ storyItem: editedStory })
+          : StoryActions.noopAction()
+        ),
+        catchError(error => of(StoryActions.loadStoryItemsFailure({ error })))
+      ))
+    )
+  );
 
   constructor(
     private readonly actions$: Actions,
     private readonly apiService: ApiService,
     private readonly storyService: StoryService,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly dialog: MatDialog
   ) {}
 }
 

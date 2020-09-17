@@ -30,7 +30,6 @@ export class BacklogComponent {
 
   openStoryEditorDialog() {
     const dialogRef = this.dialog.open(StoryEditorDialogComponent);
-
     dialogRef.afterClosed().pipe(
       filter(result => result),
       first()

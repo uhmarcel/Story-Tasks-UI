@@ -2,54 +2,93 @@
 
 <mat-dialog-content class="mat-typography">
 
-  <form [formGroup]="storyForm">
+  <form [formGroup]="formGroup">
     <mat-form-field [appearance]="appearance">
       <mat-label>Story ID</mat-label>
       <input matInput type="text" formControlName="id">
-      <mat-error *ngIf="storyForm.get('id').invalid">Please enter a valid id</mat-error>
+      <mat-error *ngIf="formGroup.get('id').invalid">Please enter a valid id</mat-error>
     </mat-form-field>
 
     <mat-form-field [appearance]="appearance">
-      <mat-label>Name</mat-label>
-      <input matInput type="text" formControlName="name">
-      <mat-error *ngIf="storyForm.get('name').invalid">Please enter a valid name</mat-error>
+      <mat-label>Parent ID</mat-label>
+      <mat-select formControlName="parent">
+        <mat-option [value]="-1">None</mat-option>
+        <ng-container *ngFor="let id of allStoryIds$ | async">
+          <mat-option [value]="id">{{ id | storyId }}</mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="formGroup.get('parent').invalid">Please enter a valid id</mat-error>
+    </mat-form-field>
+
+    <mat-form-field [appearance]="appearance">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title">
+      <mat-error *ngIf="formGroup.get('title').invalid">Please enter a valid title</mat-error>
     </mat-form-field>
 
     <mat-form-field [appearance]="appearance">
       <mat-label>Description</mat-label>
       <input matInput type="text" formControlName="description">
-      <mat-error *ngIf="storyForm.get('description').invalid">Please enter a valid description</mat-error>
+      <mat-error *ngIf="formGroup.get('description').invalid">Please enter a valid description</mat-error>
     </mat-form-field>
 
     <mat-form-field [appearance]="appearance">
       <mat-label>Priority</mat-label>
       <mat-select formControlName="priority">
         <ng-container *ngFor="let priority of typeKeys.priorities">
-          <mat-option value="{{ priority }}">{{ priority }}</mat-option>
+          <mat-option [value]="priority">
+            {{ priority }}
+          </mat-option>
         </ng-container>
       </mat-select>
-      <mat-error *ngIf="storyForm.get('priority').invalid">Please choose a priority</mat-error>
+      <mat-error *ngIf="formGroup.get('priority').invalid">Please choose a priority</mat-error>
     </mat-form-field>
 
     <mat-form-field [appearance]="appearance">
       <mat-label>Size</mat-label>
       <mat-select formControlName="size">
         <ng-container *ngFor="let size of typeKeys.sizes">
-          <mat-option value="{{ size }}">{{ size }}</mat-option>
+          <mat-option [value]="size">{{ size }}</mat-option>
         </ng-container>
       </mat-select>
-      <mat-error *ngIf="storyForm.get('size').invalid">Please choose a size</mat-error>
+      <mat-error *ngIf="formGroup.get('size').invalid">Please choose a size</mat-error>
     </mat-form-field>
 
     <mat-form-field [appearance]="appearance">
       <mat-label>Status</mat-label>
       <mat-select formControlName="status">
         <ng-container *ngFor="let status of typeKeys.statuses">
-          <mat-option value="{{ status }}">{{ status }}</mat-option>
+          <mat-option [value]="status">{{ status }}</mat-option>
         </ng-container>
       </mat-select>
-      <mat-error *ngIf="storyForm.get('status').invalid">Please choose a status</mat-error>
+      <mat-error *ngIf="formGroup.get('status').invalid">Please choose a status</mat-error>
     </mat-form-field>
+
+    <div style="display: flex">
+      <span class="mat-h3" style="margin: auto 0">Tasks</span>
+      <span class="pull-right"></span>
+      <button mat-icon-button color="primary" (click)="addTask()">
+        <mat-icon>
+          add
+        </mat-icon>
+      </button>
+    </div>
+
+
+
+    <ng-container formArrayName="tasks"
+         *ngFor="let task of tasksForm.controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <mat-form-field [appearance]="appearance">
+          <input matInput type="text" formControlName="label">
+          <button mat-button matSuffix mat-icon-button (click)="removeTask(i)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <mat-error *ngIf="formGroup.get('tasks').invalid">Please enter a task description</mat-error>
+        </mat-form-field>
+      </ng-container>
+    </ng-container>
+
   </form>
 
 </mat-dialog-content>
@@ -59,8 +98,8 @@
   <button
     mat-stroked-button cdkFocusInitial
     color="primary"
-    [disabled]="storyForm.invalid"
-    [mat-dialog-close]="storyForm.value">
+    [disabled]="formGroup.invalid"
+    [mat-dialog-close]="formGroup.value">
     Create
   </button>
 </mat-dialog-actions>

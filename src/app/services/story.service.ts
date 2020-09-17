@@ -13,30 +13,33 @@ export class StoryService {
   constructor(private readonly store: Store) {}
 
   public validateStoryItem(toValidate: StoryItem): Observable<StoryItem> {
-    console.log('REACHED HERE');
-    return of(toValidate).pipe(
-      concatMap(story => of(story).pipe(
-        withLatestFrom(
-          this.store.select(StorySelectors.selectStoryItemsByID(story.children))
-        )
-      )),
-      map(([story, children]) => {
-        switch (story.status) {
-          case Status.ANALYSIS:
-          case Status.TODO:
-          case Status.IN_PROGRESS:
-            break;
-          case Status.DONE:
-            const tasksDone = story.tasks.reduce((allDone, task) => allDone && task.done, true);
-            const childrenDone = children.reduce((allDone, child) => allDone && child.status === Status.DONE, true);
-            if (!tasksDone || !childrenDone) {
-              throw new Error(`Unable to move story to done: Story has tasks yet to be completed`);
-            }
-            break;
-        }
-        return story;
-      })
-    );
+    return of(toValidate);
+    // return of(toValidate).pipe(
+    //   filter(story => story != null),
+    //   concatMap(story => of(story).pipe(
+    //     withLatestFrom(
+    //       this.store.select(StorySelectors.selectStoryItemsByID(story.children))
+    //     )
+    //   )),
+    //   map(([story, children]) => {
+    //     switch (story?.status) {
+    //       case Status.ANALYSIS:
+    //       case Status.TODO:
+    //       case Status.IN_PROGRESS:
+    //         break;
+    //       case Status.DONE:
+    //         const tasksDone = story.tasks?.reduce((allDone, task) => allDone && task.done, true);
+    //         const childrenDone = children?.reduce((allDone, child) => allDone && child.status === Status.DONE, true);
+    //         if (!tasksDone || !childrenDone) {
+    //           throw new Error(`Unable to move story to done: Story has tasks yet to be completed`);
+    //         }
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    //     return story;
+    //   })
+    // );
   }
 
 }

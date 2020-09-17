@@ -1,9 +1,10 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 70vw;
+  min-width: 70vw;
+}
 
-  mat-form-field {
-    padding-bottom: 4px;
-  }
+.list-item {
+  border-bottom: solid 1px #eee;
+  padding: 0 !important;
 }

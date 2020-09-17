@@ -33,7 +33,7 @@ export class BoardComponent {
       map(storyIDs => storyIDs[prevStatus][storyIndex]),
       first()
     ).subscribe(storyID => this.store.dispatch(
-      StoryActions.updateStoryStatus({ storyID, status }))
+      StoryActions.updateStoryItemStatus({ storyID, status }))
     );
   }
 

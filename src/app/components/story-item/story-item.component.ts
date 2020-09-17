@@ -8,6 +8,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {distinctUntilChanged, filter, first, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 import {StoryActions} from '../../store/actions';
 import {MatSelectionListChange} from '@angular/material/list';
+import {StoryEditorDialogComponent} from '../dialogs/story-editor-dialog/story-editor-dialog.component';
 
 @Component({
   selector: 'app-story-item',
@@ -48,12 +49,16 @@ export class StoryItemComponent implements OnInit {
     const task = change.option.value;
 
     setTimeout(() =>
-      this.store.dispatch(StoryActions.updateStoryTask({
+      this.store.dispatch(StoryActions.updateStoryItemTask({
         storyID: this.storyID,
         taskID: task.id,
         task: { ...task, done }
       })),
       500
     );
+  }
+
+  debug(story: StoryItem) {
+    this.store.dispatch(StoryActions.openStoryEditor({ storyItem: story }));
   }
 }

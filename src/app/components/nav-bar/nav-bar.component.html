@@ -1,11 +1,21 @@
-<mat-toolbar>
+<mat-toolbar class="nav-bar">
 
   <span>Story Tasks</span>
 
   <span class="pull-right">
-    <button mat-stroked-button routerLink="/backlog" routerLinkActive="active">Backlog</button>
+    <button mat-button routerLink="/backlog" routerLinkActive="active">
+      <span>
+        Backlog
+      </span>
+    </button>
+
     <span class="pad-left"></span>
-    <button mat-stroked-button routerLink="/board" routerLinkActive="active">Board</button>
+
+    <button mat-button routerLink="/board" routerLinkActive="active">
+      <span>
+        Board
+      </span>
+    </button>
   </span>
 
 </mat-toolbar>

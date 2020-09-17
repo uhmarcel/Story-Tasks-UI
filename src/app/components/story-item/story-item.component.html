@@ -9,7 +9,7 @@
   <mat-expansion-panel-header *ngrxLet="storyItem$ as story">
     <ng-container *ngIf="story; else loading">
       <div class="story-summary-container">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="debug(story)">
           <mat-icon [svgIcon]="story.priority"></mat-icon>
         </button>
 
