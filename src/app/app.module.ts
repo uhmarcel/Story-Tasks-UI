@@ -20,6 +20,7 @@ import {applicationReducers} from './store/reducers';
 import {applicationEffects} from './store/effects';
 import {ReactiveComponentModule} from '@ngrx/component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {LoginComponent} from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     StoryItemComponent,
     StoryIdPipe,
     StoryListComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
