@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { StoryItem, StoryItemParams } from '../models/types';
 import { toRawParams } from '../util/utils';
+import {selectItemId} from '../store/reducers/story.reducer';
 
 
 @Injectable({
@@ -15,24 +16,24 @@ export class ApiService {
   ) {}
 
   public getStoryItems(params: StoryItemParams = null) {
-    const endpoint = `${environment.backendUrl}/api/v1/story`;
+    const endpoint = `${environment.backendUrl}/api/v1/stories`;
     return this.httpClient.get<StoryItem[]>(endpoint, { params: toRawParams(params) });
   }
 
   public createStoryItem(story: StoryItem) {
-    const endpoint = `${environment.backendUrl}/api/v1/story`;
+    const endpoint = `${environment.backendUrl}/api/v1/stories`;
     return this.httpClient.post<StoryItem[]>(endpoint, story);
   }
 
   public updateStoryItem(story: StoryItem) {
-    const endpoint = `${environment.backendUrl}/api/v1/story/${story.id}`;
+    const endpoint = `${environment.backendUrl}/api/v1/stories/${selectItemId(story)}`;
     return this.httpClient.put<StoryItem[]>(endpoint, story);
   }
 
 
   // Non-definitive
   public getStoryItemsById(ids: number[]) {
-    const endpoint = `${environment.backendUrl}/api/v1/story`;
+    const endpoint = `${environment.backendUrl}/api/v1/stories`;
     return this.httpClient.get<StoryItem[]>(endpoint, {
       params: { ids: ids.toString() }
     });

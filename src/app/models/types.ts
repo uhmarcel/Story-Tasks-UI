@@ -1,6 +1,6 @@
 
 export interface StoryItem {
-  id: number;
+  identifier: Identifier;
   parent: number;
   children: number[];
   title: string;
@@ -11,17 +11,22 @@ export interface StoryItem {
   status: Status;
 }
 
-export interface StoryItemParams {
-  parent?: number;
-  status?: Status;
-  priority?: Priority;
-  includeParent?: boolean;
+export interface Identifier {
+  userId: string;
+  referenceId: number;
 }
 
 export interface Task {
   id?: string;
   label: string;
   done: boolean;
+}
+
+export interface StoryItemParams {
+  parent?: number;
+  status?: Status;
+  priority?: Priority;
+  includeParent?: boolean;
 }
 
 export type Priority = 'BLOCKER' | 'CRITICAL' | 'VERY_HIGH' | 'HIGH' | 'MEDIUM' | 'LOW' | 'VERY_LOW' | 'OPTIONAL';

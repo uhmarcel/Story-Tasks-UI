@@ -8,8 +8,10 @@ export interface StoryState extends EntityState<StoryItem> {
     error?: any;
 }
 
+export const selectItemId = (item: StoryItem): number => item?.identifier?.referenceId;
+
 export const storyAdapter: EntityAdapter<StoryItem> = createEntityAdapter<StoryItem>({
-  selectId: story => story?.id
+  selectId: selectItemId
 });
 
 export const initialStoryState = storyAdapter.getInitialState({

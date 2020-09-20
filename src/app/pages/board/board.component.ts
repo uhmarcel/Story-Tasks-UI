@@ -26,15 +26,11 @@ export class BoardComponent {
 
   dropStory(event: CdkDragDrop<any>) {
     if (event.previousContainer.id === event.container.id) { return; }
-    const prevStatus = event.previousContainer.data;
     const status = event.container.data;
-    const storyIndex = event.previousIndex;
+    const storyID = event.item.data;
 
-    this.storiesByStatus$.pipe(
-      map(storyIDs => storyIDs[prevStatus][storyIndex]),
-      first()
-    ).subscribe(storyID => this.store.dispatch(
-      StoryActions.updateStoryItemStatus({ storyID, status }))
+    this.store.dispatch(
+      StoryActions.updateStoryItemStatus({ storyID, status })
     );
   }
 

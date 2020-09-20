@@ -31,7 +31,7 @@ export class StoryEffects {
     ), { dispatch: false }
   );
 
-  // TODO: BIG TIME!! Update to use MERGEMAP / CONCATMAP
+  // TODO: Urgent!! Update to use MERGEMAP / CONCATMAP
 
 
   loadStories$ = createEffect(() =>
@@ -153,6 +153,7 @@ export class StoryEffects {
       ofType(StoryActions.openStoryEditor),
       mergeMap(({ storyItem }) => of(storyItem).pipe(
         switchMap(story => this.dialog.open(StoryEditorDialogComponent, { data: story }).afterClosed()),
+        tap(console.log),
         switchMap(editedStory => this.storyService.validateStoryItem(editedStory)),
         map(editedStory => editedStory
           ? StoryActions.createStoryItem({ storyItem: editedStory })

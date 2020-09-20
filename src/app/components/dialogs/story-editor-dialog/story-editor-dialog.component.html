@@ -3,11 +3,13 @@
 <mat-dialog-content class="mat-typography">
 
   <form [formGroup]="formGroup">
-    <mat-form-field [appearance]="appearance">
-      <mat-label>Story ID</mat-label>
-      <input matInput type="text" formControlName="id">
-      <mat-error *ngIf="formGroup.get('id').invalid">Please enter a valid id</mat-error>
-    </mat-form-field>
+    <ng-container formGroupName="identifier">
+      <mat-form-field [appearance]="appearance">
+        <mat-label>Story ID</mat-label>
+        <input matInput type="text" formControlName="referenceId">
+        <mat-error *ngIf="formGroup.get('identifier').invalid">Please enter a valid id</mat-error>
+      </mat-form-field>
+    </ng-container>
 
     <mat-form-field [appearance]="appearance">
       <mat-label>Parent ID</mat-label>
@@ -73,8 +75,6 @@
         </mat-icon>
       </button>
     </div>
-
-
 
     <ng-container formArrayName="tasks"
          *ngFor="let task of tasksForm.controls; let i = index">

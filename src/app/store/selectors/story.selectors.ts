@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {storyAdapterSelectors, StoryState} from '../reducers/story.reducer';
+import {selectItemId, storyAdapterSelectors, StoryState} from '../reducers/story.reducer';
 import {Status} from '../../models/types';
 
 export const selectStoryState = createFeatureSelector<StoryState>('storyItems');
@@ -39,7 +39,7 @@ export const selectStoryIDsGroupByStatus = createSelector(
   selectAllStoryItems,
   stories => stories.reduce(
     (byStatus, story) => {
-      byStatus[story.status].push(story.id);
+      byStatus[story.status].push(selectItemId(story));
       return byStatus;
     },
     initByStatusDictionary()

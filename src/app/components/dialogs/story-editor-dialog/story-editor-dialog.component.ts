@@ -28,7 +28,10 @@ export class StoryEditorDialogComponent {
     private readonly store: Store
   ) {
     this.formGroup = formBuilder.group({
-      id: [this.data?.id, [Validators.required, Validators.min(0), Validators.max(9999), validInteger]],
+      identifier: formBuilder.group({
+        userId: this.data?.identifier.userId,
+        referenceId: [this.data?.identifier.referenceId, [Validators.required, Validators.min(0), Validators.max(9999), validInteger]],
+      }),
       parent: [this.data?.parent, Validators.required],
       children: [this.data?.children, []],
       title: [this.data?.title, [Validators.required, Validators.minLength(1), Validators.maxLength(80)]],

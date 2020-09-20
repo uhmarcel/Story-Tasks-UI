@@ -26,11 +26,5 @@ export class StoryListComponent implements OnInit {
     this.CONNECTED_TO = ['list-analysis', 'list-todo', 'list-progress', 'list-done']
       .filter(list => list !== this.connectedID);
   }
-
-  drop(event: CdkDragDrop<number[], any>) {
-    console.log(event.previousContainer.id, '->', event.container.id);
-  }
-
-
-
+  
 }

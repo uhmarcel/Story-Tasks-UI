@@ -4,7 +4,7 @@ import * as faker from 'faker';
 
 export function generateMockStory(id: number, idPool: number[] = []): StoryItem {
  return {
-   id: id ? id : getNextAvailableId(idPool),
+   identifier: { userId: null, referenceId: id ? id : getNextAvailableId(idPool) },
    parent: pickParent(idPool),
    children: [],
    title: faker.name.title(),
