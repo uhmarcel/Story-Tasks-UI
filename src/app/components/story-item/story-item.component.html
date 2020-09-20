@@ -3,6 +3,7 @@
   (closed)="this.expanded$.next(false)"
   [ngClass]="{ collapsed: !this.expanded$.getValue() }"
   [disabled]="!(storyItem$ | async)"
+  [@easeIn]
   hideToggle>
   <!--  [ngStyle]="{ backgroundColor: this.colorMap[this.story.size] }"-->
 
