@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Store} from '@ngrx/store';
+import {StoryActions} from '../../store/actions';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,6 +9,10 @@ import { Component } from '@angular/core';
 })
 export class NavBarComponent {
 
-  constructor() {}
+  constructor(private readonly store: Store) {}
+
+  openStoryEditor() {
+    this.store.dispatch(StoryActions.openStoryEditor({}));
+  }
 
 }

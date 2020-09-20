@@ -1,0 +1,5 @@
+@import './variables.scss';
+
+router-outlet {
+  padding: 0 $stk-space-large;
+}

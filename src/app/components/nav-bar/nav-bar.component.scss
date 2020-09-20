@@ -1,6 +1,23 @@
 @import '../../variables';
 
 .nav-bar {
-  padding-left: $stk-space-large;
-  padding-right: $stk-space-large;
+  background-color: #fcfcfc; // #3377bb;
+  height: $stk-nav-bar-height !important;
+
+  .nav-title {
+    font-size: 1rem;
+  }
+
+  .nav-item {
+    height: 100%;
+    padding: 0 $stk-space-medium;
+    border-radius: 0;
+    margin: auto 0;
+
+    span {
+      display: inline-block;
+      margin-top: $stk-space-extra-small;
+    }
+  }
+
 }

@@ -18,13 +18,14 @@ export class BoardComponent {
     select(StorySelectors.selectStoryIDsGroupByStatus),
   );
 
-  public readonly STATUS_KEYS = Object.keys(Status);
+  public readonly STATUS_KEYS = Object.keys(Status); // .filter(status => status !== Status.ANALYSIS);
 
   constructor(private readonly store: Store) {
     this.store.dispatch(StoryActions.loadStoryItems({}));
   }
 
   dropStory(event: CdkDragDrop<any>) {
+    if (event.previousContainer.id === event.container.id) { return; }
     const prevStatus = event.previousContainer.data;
     const status = event.container.data;
     const storyIndex = event.previousIndex;

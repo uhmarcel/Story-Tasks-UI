@@ -1,0 +1,15 @@
+@import '../../variables';
+
+.login-container {
+  padding: 0 $stk-space-medium;
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 3em auto;
+  text-align: center;
+}
+
+mat-form-field {
+  display: block;
+}

@@ -1,21 +1,27 @@
-<mat-toolbar class="nav-bar">
+<mat-toolbar class="nav-bar mat-elevation-z5">
 
-  <span>Story Tasks</span>
+  <button mat-button routerLink="/" routerLinkActive="active" class="nav-item">
+    <span class="nav-title">
+      Story Tasks
+    </span>
+  </button>
 
-  <span class="pull-right">
-    <button mat-button routerLink="/backlog" routerLinkActive="active">
-      <span>
-        Backlog
-      </span>
-    </button>
+  <button mat-button routerLink="/backlog" routerLinkActive="active" class="nav-item">
+    <span>
+      Backlog
+    </span>
+  </button>
 
-    <span class="pad-left"></span>
+  <button mat-button routerLink="/board" routerLinkActive="active" class="nav-item">
+    <span>
+      Board
+    </span>
+  </button>
 
-    <button mat-button routerLink="/board" routerLinkActive="active">
-      <span>
-        Board
-      </span>
-    </button>
-  </span>
+  <span class="pull-right"></span>
+
+  <button mat-icon-button (click)="openStoryEditor()">
+    <mat-icon>add</mat-icon>
+  </button>
 
 </mat-toolbar>

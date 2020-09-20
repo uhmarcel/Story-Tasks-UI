@@ -18,7 +18,7 @@ export const updateStoryItemStatus = createAction('[Story Item API] Update story
 export const updateStoryItemSuccess = createAction('[Story Item API] Update story item SUCCESS', props<{ storyItems: StoryItem[] }>());
 export const updateStoryItemFailure = createAction('[Story Item API] Update story item FAILURE', props<{ error: any }>());
 
-export const openStoryEditor = createAction('[Story Item Editor] Open story item editor', props<{ storyItem: StoryItem }>());
+export const openStoryEditor = createAction('[Story Item Editor] Open story item editor', props<{ storyItem?: StoryItem }>());
 
 export const generateMockStory = createAction('[Story Item DEBUG] Generate mock story');
 
