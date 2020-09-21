@@ -34,6 +34,10 @@ export class LoginComponent implements OnInit {
       scopes: ['openid', 'email', 'profile'],
       pkce: oicdConfig.pkce
     },
+    idps: [{
+      type: 'GOOGLE',
+      id: '0oa10n7fe9982Tg8J4x7'
+    }]
   });
 
   constructor(
