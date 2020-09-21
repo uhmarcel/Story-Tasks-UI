@@ -8,21 +8,13 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {distinctUntilChanged, filter, first, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 import {StoryActions} from '../../store/actions';
 import {MatSelectionListChange} from '@angular/material/list';
-import {StoryEditorDialogComponent} from '../dialogs/story-editor-dialog/story-editor-dialog.component';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {easeIn} from '../../styles/animations';
 
 @Component({
   selector: 'app-story-item',
   templateUrl: './story-item.component.html',
   styleUrls: ['./story-item.component.scss'],
-  animations: [
-    trigger('easeIn', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('0.2s  ease-in', style({ opacity: 1 })),
-      ])
-    ]),
-  ]
+  animations: [easeIn]
 })
 export class StoryItemComponent implements OnInit {
 
