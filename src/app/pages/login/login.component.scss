@@ -1,15 +1,18 @@
 @import 'src/app/styles/variables';
 
-.login-container {
-  padding: 0 $stk-space-medium;
-}
-
-mat-card {
-  max-width: 400px;
-  margin: 3em auto;
-  text-align: center;
-}
-
-mat-form-field {
-  display: block;
-}
+//#sign-in-container {
+//
+//  &.auth-container {
+//
+//    .button-primary {
+//      color: #fff;
+//      background-color: #36659f;
+//      backgrond: none;
+//      border-color: #234166;
+//      border-bottom-color: #203c5e;
+//      box-shadow: rgba(0, 0, 0, 0.15) 0 1px 0, rgba(255, 255, 255, 0.1) 0 1px 0 0 inset;
+//    }
+//
+//  }
+//
+//}

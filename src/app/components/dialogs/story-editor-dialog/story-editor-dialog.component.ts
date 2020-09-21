@@ -4,11 +4,13 @@ import {AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, Va
 import {StoryItem, Task, typeKeys} from '../../../models/types';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../../store/selectors';
+import {easeIn} from '../../../styles/animations';
 
 @Component({
   selector: 'app-create-story-dialog',
   templateUrl: './story-editor-dialog.component.html',
-  styleUrls: ['./story-editor-dialog.component.scss']
+  styleUrls: ['./story-editor-dialog.component.scss'],
+  animations: [easeIn]
 })
 export class StoryEditorDialogComponent {
 

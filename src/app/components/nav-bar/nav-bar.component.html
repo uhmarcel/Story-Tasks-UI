@@ -1,6 +1,7 @@
 <mat-toolbar class="nav-bar mat-elevation-z5">
 
   <button mat-button routerLink="/" routerLinkActive="active" class="nav-item">
+    <img src="./assets/logo-32x32.png" class="nav-logo">
     <span class="nav-title">
       Story Tasks
     </span>
@@ -19,6 +20,12 @@
   </button>
 
   <span class="pull-right"></span>
+
+  <button mat-button (click)="signOut()" class="nav-item" *ngIf="router.url !== '/login'">
+    <span>
+      Sign Out
+    </span>
+  </button>
 
   <button mat-icon-button (click)="openStoryEditor()">
     <mat-icon>add</mat-icon>

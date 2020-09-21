@@ -26,6 +26,7 @@
     "@ngrx/entity": "^10.0.0",
     "@ngrx/store": "^10.0.0",
     "@okta/okta-angular": "^2.2.0",
+    "@okta/okta-signin-widget": "^4.4.4",
     "@types/faker": "^5.1.0",
     "faker": "^5.1.0",
     "rxjs": "~6.5.4",

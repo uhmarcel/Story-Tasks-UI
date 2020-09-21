@@ -1,10 +1,15 @@
 @import 'src/app/styles/variables';
 
 .nav-bar {
-  background-color: #fcfcfc; // #3377bb;
+  background-color: $stk-primary-color; // #3377bb;
   height: $stk-nav-bar-height !important;
 
+  .nav-logo {
+    width: 32px;
+  }
+
   .nav-title {
+    margin-left: $stk-space-medium;
     font-size: 1rem;
   }
 
