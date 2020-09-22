@@ -1,5 +1,7 @@
 <div [@easeIn]>
-<h2 mat-dialog-title>Create story</h2>
+<h2 mat-dialog-title>
+  {{ editorType }} story
+</h2>
 
 <mat-dialog-content class="mat-typography">
 
@@ -8,7 +10,7 @@
     <mat-form-field [appearance]="appearance">
       <mat-label>Title</mat-label>
       <input matInput type="text" formControlName="title">
-      <mat-error *ngIf="formGroup.get('title').invalid">Please enter a valid title</mat-error>
+      <mat-error *ngIf="formGroup.get('title').invalid">Please enter a title</mat-error>
     </mat-form-field>
 
     <mat-form-field [appearance]="appearance">
@@ -25,7 +27,7 @@
           <mat-option [value]="id">{{ id | storyId }}</mat-option>
         </ng-container>
       </mat-select>
-      <mat-error *ngIf="formGroup.get('parent').invalid">Please enter a valid id</mat-error>
+      <mat-error *ngIf="formGroup.get('parent').invalid">Please choose an id</mat-error>
     </mat-form-field>
 
     <mat-form-field [appearance]="appearance">
@@ -93,8 +95,10 @@
     mat-stroked-button cdkFocusInitial
     color="primary"
     [disabled]="formGroup.invalid"
-    [mat-dialog-close]="formGroup.value">
-    Create
+    (click)="submitStory()"
+    [mat-dialog-close]=""
+    >
+    {{ editorType }}
   </button>
 </mat-dialog-actions>
 </div>

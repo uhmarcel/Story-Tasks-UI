@@ -5,11 +5,9 @@
   ></app-story-list>
 </div>
 
-<mat-list-item>
-  <button mat-stroked-button color="primary" (click)="openStoryEditorDialog()">
-    Create Story
-  </button>
-  <button mat-stroked-button color="secondary" (click)="generateRandomStory()">
+<div style="display: flex; justify-content: center; margin-top: 16px">
+  <button mat-button color="primary" (click)="generateRandomStory()">
     Generate
   </button>
-</mat-list-item>
+</div>
+

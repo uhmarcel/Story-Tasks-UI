@@ -29,15 +29,30 @@ export interface StoryItemParams {
   includeParent?: boolean;
 }
 
-export type Priority = 'BLOCKER' | 'CRITICAL' | 'VERY_HIGH' | 'HIGH' | 'MEDIUM' | 'LOW' | 'VERY_LOW' | 'OPTIONAL';
+export enum Priority {
+  BLOCKER = 'BLOCKER',
+  CRITICAL = 'CRITICAL',
+  VERY_HIGH = 'VERY_HIGH',
+  HIGH = 'HIGH',
+  MEDIUM = 'MEDIUM',
+  LOW = 'LOW',
+  VERY_LOW = 'VERY_LOW',
+  OPTIONAL = 'OPTIONAL'
+}
 
-export type Size = 'XXL' | 'XL' | 'L' | 'M' | 'S';
+export enum Size {
+  XXL = 'XXL',
+  XL = 'XL',
+  L = 'L',
+  M = 'M',
+  S = 'S'
+}
 
 export enum Status {
-  'ANALYSIS' = 'ANALYSIS',
-  'TODO' = 'TODO',
-  'IN_PROGRESS' = 'IN_PROGRESS',
-  'DONE' = 'DONE'
+  ANALYSIS = 'ANALYSIS',
+  TODO = 'TODO',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DONE = 'DONE'
 }
 
 // Type metadata

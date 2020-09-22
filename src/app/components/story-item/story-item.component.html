@@ -5,7 +5,7 @@
   [disabled]="!(storyItem$ | async)"
   [@easeIn]
   hideToggle>
-  <!--  [ngStyle]="{ backgroundColor: this.colorMap[this.story.size] }"-->
+<!--    [ngStyle]="{ backgroundColor: this.colorMap[(storyItem$ | async)?.size] }">-->
 
   <mat-expansion-panel-header *ngrxLet="storyItem$ as story">
     <ng-container *ngIf="story; else loading">

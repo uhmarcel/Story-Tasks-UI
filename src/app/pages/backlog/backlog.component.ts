@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {MatDialog} from '@angular/material/dialog';
-import {StoryEditorDialogComponent} from '../../components/dialogs/story-editor-dialog/story-editor-dialog.component';
 import {filter, first, map, switchMap, tap} from 'rxjs/operators';
 import {keyValue, StoryItem, StoryItemParams} from '../../models/types';
 import {generateMockStory} from '../../util/generate-data';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../store/selectors';
 import {StoryActions} from '../../store/actions';
+import {StoryEditorComponent} from '../../components/dialogs/story-editor/story-editor.component';
 
 @Component({
   selector: 'app-backlog',
@@ -26,14 +26,6 @@ export class BacklogComponent {
   ) {
     const params: StoryItemParams = { parent: -1 };
     this.store.dispatch(StoryActions.loadStoryItems({ params }));
-  }
-
-  openStoryEditorDialog() {
-    const dialogRef = this.dialog.open(StoryEditorDialogComponent);
-    dialogRef.afterClosed().pipe(
-      filter(result => result),
-      first()
-    ).subscribe(story => this.store.dispatch(StoryActions.createStoryItem({ storyItem: story })));
   }
 
   generateRandomStory() {

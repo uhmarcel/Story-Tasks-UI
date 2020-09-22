@@ -10,7 +10,7 @@ import {StorySelectors} from '../selectors';
 import {generateMockStory} from '../../util/generate-data';
 import {StoryService} from '../../services/story.service';
 import {MatDialog} from '@angular/material/dialog';
-import {StoryEditorDialogComponent} from '../../components/dialogs/story-editor-dialog/story-editor-dialog.component';
+import {StoryEditorComponent} from '../../components/dialogs/story-editor/story-editor.component';
 
 @Injectable()
 export class StoryEffects {
@@ -63,9 +63,7 @@ export class StoryEffects {
       concatMap(action => of(action).pipe(
         withLatestFrom(this.store.select(StorySelectors.selectAreChildStoriesLoaded(action.parentID)))
       )),
-      tap(console.log),
       filter(([_, areLoaded]) => areLoaded === false),
-      tap(console.log),
       switchMap(([{ parentID }, _]) => this.apiService.getStoryItems({ parent: parentID })),
       map(storyItems => StoryActions.loadStoryItemsSuccess({ storyItems })),
       catchError(error => of(StoryActions.loadStoryItemsFailure({ error })))
@@ -151,18 +149,8 @@ export class StoryEffects {
   openStoryEditor$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoryActions.openStoryEditor),
-      mergeMap(({ storyItem }) => of(storyItem).pipe(
-        switchMap(story => this.dialog.open(StoryEditorDialogComponent, { data: story }).afterClosed()),
-        tap(console.log),
-        switchMap(editedStory => this.storyService.validateStoryItem(editedStory)),
-        map(editedStory => editedStory
-          ? StoryActions.createStoryItem({ storyItem: editedStory })
-          : StoryActions.noopAction()
-        ),
-        catchError(error => of(StoryActions.loadStoryItemsFailure({ error })))
-      ))
-    )
-  );
+      tap( ({ storyItem }) => this.dialog.open(StoryEditorComponent, { data: storyItem })),
+    ), { dispatch: false });
 
   constructor(
     private readonly actions$: Actions,

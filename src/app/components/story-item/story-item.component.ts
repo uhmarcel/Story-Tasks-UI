@@ -24,7 +24,7 @@ export class StoryItemComponent implements OnInit {
   public storyItem$: Observable<StoryItem>;
   public expanded$: BehaviorSubject<boolean>;
 
-  // public readonly colorMap = colorMapping;
+  public readonly colorMap = colorMapping;
 
   constructor(private readonly store: Store) {}
 

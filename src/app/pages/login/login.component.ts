@@ -32,7 +32,10 @@ export class LoginComponent implements OnInit {
       display: 'page',
       responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile'],
-      pkce: oicdConfig.pkce
+      pkce: oicdConfig.pkce,
+      cookies: {
+        secure: false
+      }
     },
     idps: [{
       type: 'GOOGLE',
@@ -46,18 +49,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.signInWidget.renderEl({
-        el: '#sign-in-container'},
-      (res) => {
-        if (res.status === 'SUCCESS') {
-          this.authService.loginRedirect('/', { sessionToken: res.session.token });
-          this.signInWidget.hide();
-        }
-      },
-      (err) => {
-        throw err;
-      }
-    );
+    this.signInWidget.renderEl({ el: '#sign-in-container' });
   }
 
   // async ngOnInit() {
