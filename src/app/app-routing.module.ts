@@ -14,11 +14,11 @@ import {AuthGuard} from './services/auth/auth.guard';
 // TODO: Use sign in widget & clean routes
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'login/callback', component: OktaCallbackComponent },
-  { path: '', redirectTo: 'board', pathMatch: 'full', canActivate: [ AuthGuard ]},
+  { path: '', redirectTo: 'backlog', pathMatch: 'full', canActivate: [ AuthGuard ]},
   { path: 'backlog', component: BacklogComponent, canActivate: [ AuthGuard] },
   { path: 'board', component: BoardComponent, canActivate: [ AuthGuard] },
+  { path: 'auth-callback', component: OktaCallbackComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

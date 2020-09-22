@@ -12,7 +12,7 @@ import {oicdConfig} from '../../config/oicd.config';
 export class LoginComponent implements OnInit {
 
   private readonly signInWidget = new SignInWidget({
-    logo: '/assets/logo-192x192.png',
+    logo: '/assets/logo.svg',
     language: 'en',
     i18n: {
       en: {

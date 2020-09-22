@@ -5,6 +5,7 @@ import {StoryItem, Task, typeKeys} from '../../../models/types';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../../store/selectors';
 import {easeIn} from '../../../styles/animations';
+import {DEFAULTS} from '../../../config/constants.config';
 
 @Component({
   selector: 'app-create-story-dialog',
@@ -32,16 +33,16 @@ export class StoryEditorDialogComponent {
     this.formGroup = formBuilder.group({
       identifier: formBuilder.group({
         userId: this.data?.identifier.userId,
-        referenceId: [this.data?.identifier.referenceId, [Validators.required, Validators.min(0), Validators.max(9999), validInteger]],
+        referenceId: this.data?.identifier.referenceId,
       }),
-      parent: [this.data?.parent, Validators.required],
+      parent: [this.data?.parent || DEFAULTS.parent, Validators.required],
       children: [this.data?.children, []],
       title: [this.data?.title, [Validators.required, Validators.minLength(1), Validators.maxLength(80)]],
       description: [this.data?.description, Validators.maxLength(255)],
       tasks: formBuilder.array([]),
-      priority: [this.data?.priority, Validators.required],
-      size: [this.data?.size, Validators.required],
-      status: [this.data?.status, Validators.required]
+      priority: [this.data?.priority || DEFAULTS.priority, Validators.required],
+      size: [this.data?.size || DEFAULTS.size, Validators.required],
+      status: [this.data?.status || DEFAULTS.status, Validators.required]
     });
 
     this.data?.tasks?.forEach(task => this.addTask(task));

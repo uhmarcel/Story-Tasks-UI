@@ -4,24 +4,6 @@
 <mat-dialog-content class="mat-typography">
 
   <form [formGroup]="formGroup">
-    <ng-container formGroupName="identifier">
-      <mat-form-field [appearance]="appearance">
-        <mat-label>Story ID</mat-label>
-        <input matInput type="text" formControlName="referenceId">
-        <mat-error *ngIf="formGroup.get('identifier').invalid">Please enter a valid id</mat-error>
-      </mat-form-field>
-    </ng-container>
-
-    <mat-form-field [appearance]="appearance">
-      <mat-label>Parent ID</mat-label>
-      <mat-select formControlName="parent">
-        <mat-option [value]="-1">None</mat-option>
-        <ng-container *ngFor="let id of allStoryIds$ | async">
-          <mat-option [value]="id">{{ id | storyId }}</mat-option>
-        </ng-container>
-      </mat-select>
-      <mat-error *ngIf="formGroup.get('parent').invalid">Please enter a valid id</mat-error>
-    </mat-form-field>
 
     <mat-form-field [appearance]="appearance">
       <mat-label>Title</mat-label>
@@ -33,6 +15,17 @@
       <mat-label>Description</mat-label>
       <input matInput type="text" formControlName="description">
       <mat-error *ngIf="formGroup.get('description').invalid">Please enter a valid description</mat-error>
+    </mat-form-field>
+
+    <mat-form-field [appearance]="appearance">
+      <mat-label>Parent ID</mat-label>
+      <mat-select formControlName="parent">
+        <mat-option [value]="-1">None</mat-option>
+        <ng-container *ngFor="let id of allStoryIds$ | async">
+          <mat-option [value]="id">{{ id | storyId }}</mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error *ngIf="formGroup.get('parent').invalid">Please enter a valid id</mat-error>
     </mat-form-field>
 
     <mat-form-field [appearance]="appearance">
