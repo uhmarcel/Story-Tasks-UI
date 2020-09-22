@@ -92,18 +92,6 @@ export class StoryEffects {
     )
   );
 
-
-//
-// ,
-//       tap(x => console.log('2')),
-//       switchMap(storyItem => this.apiService.updateStoryItem(storyItem)),
-//       tap(x => console.log('3')),
-//       map(updatedStories => StoryActions.updateStoryItemSuccess({ storyItems: updatedStories })),
-//       tap(x => console.log('4')),
-//       catchError(error => of(StoryActions.updateStoryItemFailure({ error })))
-//     ),
-
-
   updateStoryStatus$  = createEffect(() =>
     this.actions$.pipe(
       ofType(StoryActions.updateStoryItemStatus),
@@ -131,6 +119,25 @@ export class StoryEffects {
     )
   );
 
+  deleteStory$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoryActions.deleteStoryItem),
+      mergeMap(({ storyID }) => of(storyID).pipe(
+        switchMap(id => this.apiService.deleteStoryItem(id)),
+        map(id => StoryActions.deleteStoryItemSuccess({ storyID })),
+        catchError(error => of(StoryActions.deleteStoryItemFailure({ error })))
+      ))
+    )
+  );
+
+  openStoryEditor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StoryActions.openStoryEditor),
+      tap( ({ storyItem }) => this.dialog.open(StoryEditorComponent, { data: storyItem })),
+    ), {
+    dispatch: false
+  });
+
 
   // TODO: Move / allocate - debug
 
@@ -146,11 +153,7 @@ export class StoryEffects {
     )
   );
 
-  openStoryEditor$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(StoryActions.openStoryEditor),
-      tap( ({ storyItem }) => this.dialog.open(StoryEditorComponent, { data: storyItem })),
-    ), { dispatch: false });
+
 
   constructor(
     private readonly actions$: Actions,

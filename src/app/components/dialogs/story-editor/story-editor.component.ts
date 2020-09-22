@@ -7,6 +7,7 @@ import {StorySelectors} from '../../../store/selectors';
 import {easeIn} from '../../../styles/animations';
 import {DEFAULTS} from '../../../config/constants.config';
 import {StoryActions} from '../../../store/actions';
+import {selectItemId} from '../../../store/reducers/story.reducer';
 
 export enum EditorType {
   CREATE = 'Create',
@@ -35,7 +36,7 @@ export class StoryEditorComponent {
     private readonly store: Store
   ) {
     this.editorType = this.data ? EditorType.EDIT : EditorType.CREATE;
-    this.buildForm(this.data);
+    this.buildFormGroup(this.data);
   }
 
   submitStory() {
@@ -49,6 +50,13 @@ export class StoryEditorComponent {
         this.store.dispatch(StoryActions.updateStoryItem({ storyItem }));
         break;
     }
+  }
+
+  deleteStory() {
+    const storyID = selectItemId(this.data);
+    this.store.dispatch(
+      StoryActions.deleteStoryItem({ storyID })
+    );
   }
 
   addTask(task: Task = null) {
@@ -70,7 +78,7 @@ export class StoryEditorComponent {
     });
   }
 
-  private buildForm(story: StoryItem) {
+  private buildFormGroup(story: StoryItem) {
     this.formGroup = this.formBuilder.group({
       identifier: this.formBuilder.group({
         userId: story?.identifier.userId,

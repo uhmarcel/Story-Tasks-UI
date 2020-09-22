@@ -30,6 +30,12 @@ export class ApiService {
     return this.httpClient.put<StoryItem[]>(endpoint, story);
   }
 
+  public deleteStoryItem(id: number) {
+    const endpoint = `${environment.backendUrl}/api/v1/stories/${id}`;
+    return this.httpClient.delete(endpoint);
+  }
+
+
 
   // Non-definitive
   public getStoryItemsById(ids: number[]) {

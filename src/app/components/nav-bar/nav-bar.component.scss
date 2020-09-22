@@ -1,8 +1,9 @@
 @import 'src/app/styles/variables';
 
 .nav-bar {
-  background-color: $stk-primary-color; // #3377bb;
+  background-color: $stk-primary-color;
   height: $stk-nav-bar-height !important;
+  padding: 0;
 
   .nav-logo {
     width: 32px;
