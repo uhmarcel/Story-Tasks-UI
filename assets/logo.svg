@@ -1,0 +1,6 @@
+<svg viewBox="0 0 150 150" version="1.1" id="svg_null" xmlns="http://www.w3.org/2000/svg">
+	<g id="root" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<rect id="shape.accent" fill="#e84545" opacity=".5" x="75" y="0" width="80" height="150"></rect>
+		<rect id="shape.secondary" fill="#903749" opacity=".5" transform="translate(120.000000, 285.000000) rotate(90.000000) translate(-120.000000, -285.000000)" x="-95" y="250" width="80" height="150"></rect>
+	</g>
+</svg>
