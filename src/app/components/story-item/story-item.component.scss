@@ -1,29 +1,7 @@
 @import 'src/app/styles/variables';
 
-.story-item-container {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 12px;
-  background-color: #FFFFBB;
-}
 
-.chip {
-  border: solid 1px lightgray;
-  background-color: #fff;
-  border-radius: 4px;
-  padding: 1px 8px;
-  font-weight: bold;
-  color: #444;
-  font-size: 12px;
-}
 
-.story-title {
-  font-weight: bold;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  min-width: 0px;
-}
 
 .story-id {
   white-space: nowrap;
@@ -33,13 +11,40 @@ mat-expansion-panel {
   border-radius: 0 !important;
 
   mat-expansion-panel-header {
-    padding-left: $stk-space-medium;
-    padding-right: $stk-space-medium;
+    padding: 0;
 
     .story-summary-container {
       display: flex;
       align-items: center;
       width: 100%;
+
+      .priority-icon {
+        margin: 0 $stk-space-extra-small;
+      }
+
+      .story-title {
+        font-weight: bold;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        min-width: 0px;
+        font-size: $stk-font-size-medium;
+      }
+
+      .chip {
+        border: solid 1px lightgray;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 1px $stk-space-small;
+        font-weight: bold;
+        color: #444;
+        font-size: $stk-font-size-small;
+      }
+
+      .story-id {
+        margin: 0 $stk-space-small;
+        font-size: $stk-font-size-small;
+      }
     }
   }
 
@@ -47,17 +52,33 @@ mat-expansion-panel {
     padding-left: $stk-space-small;
     padding-right: $stk-space-small;
 
-    .story-details-description {
+    .story-description {
       padding-left: $stk-space-small;
       padding-right: $stk-space-small;
       padding-bottom: $stk-space-small;
+      font-size: $stk-font-size-medium;
     }
 
-    .story-details-tasks {
+    .story-tasks {
       padding-bottom: $stk-space-small;
+
+      mat-selection-list {
+        padding: 0;
+
+        mat-list-option {
+          height: auto;
+          padding-top: $stk-space-small;
+          padding-bottom: $stk-space-small;
+
+          span {
+            font-size: $stk-font-size-medium;
+            font-weight: bold;
+          }
+        }
+      }
     }
 
-    .story-details-children {
+    .story-children {
       padding-bottom: $stk-space-small;
     }
 
@@ -73,7 +94,7 @@ mat-expansion-panel {
 
 .completed {
   text-decoration: line-through;
-  font-weight: normal;
+  font-weight: normal !important;
   color: gray;
 }
 

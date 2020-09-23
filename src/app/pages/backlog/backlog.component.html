@@ -1,13 +1,17 @@
-<div class="list-container">
-  <app-story-list
-    [storyIDs]="storyIds$ | async"
-    [showStatus]="true"
-  ></app-story-list>
-</div>
+<div class="page-container">
 
-<div style="display: flex; justify-content: center; margin-top: 16px">
-  <button mat-button color="primary" (click)="generateRandomStory()">
-    Generate
-  </button>
-</div>
+  <div class="list-container">
+    <app-story-list
+      [storyIDs]="storyIds$ | async"
+      [showStatus]="true"
+    ></app-story-list>
+  </div>
 
+  <!-- For debug - TODO: remove no longer needed -->
+  <div style="display: flex; justify-content: center; margin-top: 16px">
+    <button mat-button color="primary" (click)="generateRandomStory()">
+      Generate
+    </button>
+  </div>
+
+</div>

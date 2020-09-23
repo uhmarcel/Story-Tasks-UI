@@ -9,6 +9,7 @@ export interface StoryItem {
   priority: Priority;
   size: Size;
   status: Status;
+  color: string;
 }
 
 export interface Identifier {
@@ -53,6 +54,15 @@ export enum Status {
   TODO = 'TODO',
   IN_PROGRESS = 'IN_PROGRESS',
   DONE = 'DONE'
+}
+
+export enum Color {
+  NONE = '',
+  PURPLE = '#D6CDEA',
+  BLUE = '#CBE4F9',
+  RED = '#F9D8D6',
+  GREEN = '#BCDFC9',
+  YELLOW = '#FFFFBB',
 }
 
 // Type metadata

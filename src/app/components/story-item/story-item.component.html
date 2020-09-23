@@ -3,18 +3,20 @@
   (closed)="this.expanded$.next(false)"
   [ngClass]="{ collapsed: !this.expanded$.getValue() }"
   [disabled]="!(storyItem$ | async)"
+  [ngStyle]="(storyItem$ | async)?.color | colorStyle"
   [@easeIn]
   hideToggle>
-<!--    [ngStyle]="{ backgroundColor: this.colorMap[(storyItem$ | async)?.size] }">-->
 
   <mat-expansion-panel-header *ngrxLet="storyItem$ as story">
-    <ng-container *ngIf="story; else loading">
-      <div class="story-summary-container">
-        <button mat-icon-button (click)="debug(story)">
+
+    <div class="story-summary-container">
+
+      <ng-container *ngIf="story; else loading">
+        <button class="priority-icon" mat-icon-button (click)="debug(story)">
           <mat-icon [svgIcon]="story.priority"></mat-icon>
         </button>
 
-        <span class="pad-left story-title" [ngClass]="{ completed: story.status === 'DONE'}">
+        <span class="story-title" [ngClass]="{ completed: story.status === 'DONE'}">
           {{ story.title }}
         </span>
 
@@ -24,33 +26,33 @@
           {{ story.status }}
         </div>
 
-        <div class="pad-left mat-small story-id" >
+        <div class="story-id" >
           {{ story.identifier.referenceId | storyId }}
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+
+    </div>
+
   </mat-expansion-panel-header>
 
 
   <ng-template matExpansionPanelContent *ngrxLet="storyItem$ as story">
     <div class="story-details-container">
-      <div class="story-details-description" *ngIf="story.description">
+      <div class="story-description" *ngIf="story.description">
         {{ story.description }}
       </div>
 
-      <div class="story-details-tasks" *ngIf="story.tasks && story.tasks.length > 0">
+      <div class="story-tasks" *ngIf="story.tasks && story.tasks.length > 0">
         <mat-selection-list (selectionChange)="onTaskChange($event)">
-          <ng-container *ngFor="let task of story.tasks">
-            <mat-list-option [selected]="task.done" [value]="task">
+            <mat-list-option *ngFor="let task of story.tasks" [selected]="task.done" [value]="task" >
               <span [ngClass]="{ completed: task.done }">
                 {{ task.label }}
               </span>
             </mat-list-option>
-          </ng-container>
         </mat-selection-list>
       </div>
 
-      <div class="story-details-children" *ngIf="story.children && story.children.length > 0">
+      <div class="story-children" *ngIf="story.children && story.children.length > 0">
         <app-story-list
           [storyIDs]="story.children"
         ></app-story-list>
@@ -59,18 +61,16 @@
   </ng-template>
 
   <ng-template #loading>
-    <div class="story-summary-container">
-      <mat-spinner [diameter]="30"></mat-spinner>
+    <mat-spinner [diameter]="30"></mat-spinner>
 
-      <span class="loading">
-        Loading...
-      </span>
+    <span class="loading">
+      Loading...
+    </span>
 
-      <span class="pull-right"></span>
+    <span class="pull-right"></span>
 
-      <div class="pad-left mat-small story-id" >
-        {{ this.storyID | storyId }}
-      </div>
+    <div class="pad-left mat-small story-id" >
+      {{ this.storyID | storyId }}
     </div>
   </ng-template>
 

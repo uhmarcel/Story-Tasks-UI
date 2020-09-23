@@ -1,8 +1,13 @@
 @import 'src/app/styles/variables';
 
 .nav-bar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: $stk-primary-color;
-  height: $stk-nav-bar-height !important;
+  height: $stk-header-height !important;
   padding: 0;
 
   .nav-logo {

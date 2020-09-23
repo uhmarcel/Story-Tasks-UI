@@ -1,5 +1,9 @@
 @import 'src/app/styles/variables';
 
-router-outlet {
-  padding: 0 $stk-space-large;
+.app-content {
+  top: $stk-header-height;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
 }

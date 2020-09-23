@@ -46,7 +46,7 @@
       <mat-form-field [appearance]="appearance">
         <mat-label>Priority</mat-label>
         <mat-select formControlName="priority">
-          <ng-container *ngFor="let priority of typeKeys.priorities">
+          <ng-container *ngFor="let priority of priorities">
             <mat-option [value]="priority">
               {{ priority }}
             </mat-option>
@@ -58,7 +58,7 @@
       <mat-form-field [appearance]="appearance">
         <mat-label>Size</mat-label>
         <mat-select formControlName="size">
-          <ng-container *ngFor="let size of typeKeys.sizes">
+          <ng-container *ngFor="let size of sizes">
             <mat-option [value]="size">{{ size }}</mat-option>
           </ng-container>
         </mat-select>
@@ -68,8 +68,18 @@
       <mat-form-field [appearance]="appearance">
         <mat-label>Status</mat-label>
         <mat-select formControlName="status">
-          <ng-container *ngFor="let status of typeKeys.statuses">
+          <ng-container *ngFor="let status of statuses">
             <mat-option [value]="status">{{ status }}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="formGroup.get('status').invalid">Please choose a status</mat-error>
+      </mat-form-field>
+
+      <mat-form-field [appearance]="appearance">
+        <mat-label>Color</mat-label>
+        <mat-select formControlName="color">
+          <ng-container *ngFor="let color of colors | keyvalue">
+            <mat-option [value]="color.value">{{ color.key }}</mat-option>
           </ng-container>
         </mat-select>
         <mat-error *ngIf="formGroup.get('status').invalid">Please choose a status</mat-error>
@@ -85,10 +95,9 @@
         </button>
       </div>
 
-      <ng-container formArrayName="tasks"
-           *ngFor="let task of tasksForm.controls; let i = index">
+      <ng-container *ngFor="let task of tasksForm.controls; let i = index" formArrayName="tasks">
         <ng-container [formGroupName]="i">
-          <mat-form-field [appearance]="appearance">
+          <mat-form-field appearance="standard">
             <input matInput type="text" formControlName="label">
             <button mat-button matSuffix mat-icon-button (click)="removeTask(i)">
               <mat-icon>remove</mat-icon>

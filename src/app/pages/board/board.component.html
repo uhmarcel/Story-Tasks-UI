@@ -1,17 +1,23 @@
-<div cdkDropListGroup class="columns">
-  <ng-container *ngrxLet="storiesByStatus$ as storiesByStatus">
+<div class="page-container">
 
-    <div *ngFor="let status of STATUS_KEYS"
-         class="column"
-         cdkDropList
-         (cdkDropListDropped)="dropStory($event)"
-         [cdkDropListData]="status">
-      <app-story-list
-        [storyIDs]="storiesByStatus[status]"
-        [showStatus]="false"
-      ></app-story-list>
-    </div>
+  <div class="columns" cdkDropListGroup>
 
-  </ng-container>
+    <ng-container *ngrxLet="storiesByStatus$ as storiesByStatus">
+
+      <div *ngFor="let status of STATUS_KEYS"
+           class="column"
+           cdkDropList
+           (cdkDropListDropped)="dropStory($event)"
+           [cdkDropListData]="status">
+
+        <app-story-list [storyIDs]="storiesByStatus[status]"
+                        [showStatus]="false">
+        </app-story-list>
+
+      </div>
+
+    </ng-container>
+
+  </div>
+
 </div>
-

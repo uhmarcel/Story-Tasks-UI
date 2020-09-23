@@ -1,17 +1,18 @@
 @import 'src/app/styles/variables';
 
-.columns {
-  display: flex;
-  flex: 1 1 0;
-  //background-color: red;
-  justify-content: center;
-  width: 100%;
-  height: calc(100% - 64px);
-  overflow-y: scroll;
+.page-container {
+  padding: $stk-space-extra-small;
 
-  .column {
-    width: 23% !important;
-    padding: $stk-space-small;
+  .columns {
+    display: flex;
+    width: 100%;
+
+    .column {
+      flex: 1 1 0;
+      width: 0;
+      padding: $stk-space-extra-small;
+    }
+
   }
 
 }
