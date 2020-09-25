@@ -73,10 +73,18 @@ export const typeKeys = {
   statuses: ['ANALYSIS', 'TODO', 'IN_PROGRESS', 'DONE'] as Status[],
 };
 
+// TODO: Proof of concept, delete once sorts are implemented on backend
+export const statusMap: Record<Status, number> = {
+  IN_PROGRESS: 1,
+  TODO: 2,
+  ANALYSIS: 3,
+  DONE: 4,
+};
+
 export const keyValue = {
   priorities: toElementIndexMap(typeKeys.priorities),
   sizes: toElementIndexMap(typeKeys.sizes),
-  statuses: toElementIndexMap(typeKeys.statuses),
+  statuses: statusMap,
 };
 
 function toElementIndexMap(array: any[]): object {

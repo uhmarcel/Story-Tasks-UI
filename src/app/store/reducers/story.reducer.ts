@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import {Status, StoryItem} from '../../models/types';
+import {keyValue, Status, statusMap, StoryItem} from '../../models/types';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import * as StoryActions from '../actions/story.actions';
 
@@ -10,14 +10,23 @@ export interface StoryState extends EntityState<StoryItem> {
 
 export const selectItemId = (item: StoryItem): number => item?.identifier?.referenceId;
 
+export const sortByPriority = (a: StoryItem, b: StoryItem) => {
+  return keyValue.statuses[a.status] !== keyValue.statuses[b.status]
+    ? keyValue.statuses[a.status] - keyValue.statuses[b.status]
+    : keyValue.priorities[a.priority] - keyValue.priorities[b.priority];
+};
+
+
 export const storyAdapter: EntityAdapter<StoryItem> = createEntityAdapter<StoryItem>({
-  selectId: selectItemId
+  selectId: selectItemId,
+  sortComparer: sortByPriority
 });
 
 export const initialStoryState = storyAdapter.getInitialState({
   isLoading: false,
   error: null,
 });
+
 
 export const storyReducer = createReducer<StoryState>(
   initialStoryState,
