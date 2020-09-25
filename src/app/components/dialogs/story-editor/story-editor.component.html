@@ -78,6 +78,7 @@
       <mat-form-field [appearance]="appearance">
         <mat-label>Color</mat-label>
         <mat-select formControlName="color">
+          <mat-option [value]="null">NONE</mat-option>
           <ng-container *ngFor="let color of colors | keyvalue">
             <mat-option [value]="color.value">{{ color.key }}</mat-option>
           </ng-container>

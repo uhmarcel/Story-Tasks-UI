@@ -48,8 +48,11 @@ export const storyReducer = createReducer<StoryState>(
     const nextState = storyAdapter.upsertMany(storyItems, state);
     return nextState;
   }),
-  on(StoryActions.deleteStoryItemSuccess, (state, { storyID }) => {
-    const nextState = storyAdapter.removeOne(storyID, state);
+  on(StoryActions.deleteStoryItemSuccess, (state, { storyID, storyItems }) => {
+    const nextState = storyAdapter.upsertMany(
+      storyItems,
+      storyAdapter.removeOne(storyID, state)
+    );
     return nextState;
   }),
 );

@@ -19,7 +19,7 @@ export const updateStoryItemSuccess = createAction('[Story Item API] Update stor
 export const updateStoryItemFailure = createAction('[Story Item API] Update story item FAILURE', props<{ error: any }>());
 
 export const deleteStoryItem = createAction('[Story Item API] Delete story item', props<{ storyID: number }>());
-export const deleteStoryItemSuccess = createAction('[Story Item API] Delete story item SUCCESS', props<{ storyID: number }>());
+export const deleteStoryItemSuccess = createAction('[Story Item API] Delete story item SUCCESS', props<{ storyID: number, storyItems: StoryItem[] }>());
 export const deleteStoryItemFailure = createAction('[Story Item API] Delete story item FAILURE', props<{ error: any }>());
 
 export const openStoryEditor = createAction('[Story Item Editor] Open story item editor', props<{ storyItem?: StoryItem }>());

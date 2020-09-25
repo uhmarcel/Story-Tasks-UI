@@ -82,7 +82,6 @@ export class StoryEffects {
   updateStory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoryActions.updateStoryItem),
-      tap(x => console.log('1')),
       mergeMap(({ storyItem }) => of(storyItem).pipe(
         switchMap(story => this.storyService.validateStoryItem(story)),
         switchMap(story => this.apiService.updateStoryItem(story)),
@@ -124,7 +123,7 @@ export class StoryEffects {
       ofType(StoryActions.deleteStoryItem),
       mergeMap(({ storyID }) => of(storyID).pipe(
         switchMap(id => this.apiService.deleteStoryItem(id)),
-        map(id => StoryActions.deleteStoryItemSuccess({ storyID })),
+        map(storyItems => StoryActions.deleteStoryItemSuccess({ storyID, storyItems })),
         catchError(error => of(StoryActions.deleteStoryItemFailure({ error })))
       ))
     )

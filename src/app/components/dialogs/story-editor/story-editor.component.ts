@@ -92,7 +92,7 @@ export class StoryEditorComponent {
       parent: [story?.parent || DEFAULTS.parent, Validators.required],
       children: [story?.children, []],
       title: [story?.title, [Validators.required, Validators.minLength(1), Validators.maxLength(80)]],
-      description: [story?.description, Validators.maxLength(255)],
+      description: [story?.description, Validators.maxLength(1024)],
       tasks: this.formBuilder.array([]),
       priority: [story?.priority || DEFAULTS.priority, Validators.required],
       size: [story?.size || DEFAULTS.size, Validators.required],

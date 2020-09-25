@@ -32,7 +32,7 @@ export class ApiService {
 
   public deleteStoryItem(id: number) {
     const endpoint = `${environment.backendUrl}/api/v1/stories/${id}`;
-    return this.httpClient.delete(endpoint);
+    return this.httpClient.delete<StoryItem[]>(endpoint);
   }
 
 
