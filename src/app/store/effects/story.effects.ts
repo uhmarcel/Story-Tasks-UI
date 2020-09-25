@@ -138,7 +138,7 @@ export class StoryEffects {
   });
 
 
-  // TODO: Move / allocate - debug
+  // TODO: Move / relocate - debug
 
   generateMockStory$ = createEffect(() =>
     this.actions$.pipe(

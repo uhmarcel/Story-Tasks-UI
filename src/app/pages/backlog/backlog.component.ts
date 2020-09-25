@@ -17,13 +17,10 @@ import {OktaAuthService} from '@okta/okta-angular';
 })
 export class BacklogComponent {
 
-  public ids: number[] = [];
-
   public readonly storyIds$ = this.store.pipe(select(StorySelectors.selectStoryIds));
 
   constructor(
     private readonly store: Store,
-    public dialog: MatDialog
   ) {
     const params: StoryItemParams = { parent: -1 };
     this.store.dispatch(StoryActions.loadStoryItems({ params }));

@@ -1,4 +1,4 @@
-<mat-accordion multi>
+<mat-accordion multi *ngIf="storyIDs; else loading">
   <ng-container *ngFor="let id of storyIDs">
       <app-story-item
         [storyID]="id"
@@ -10,3 +10,9 @@
       ></app-story-item>
   </ng-container>
 </mat-accordion>
+
+<!-- FIXME: Doesn't work, add list state to store -->
+<ng-template #loading>
+  <div>{{ storyIDs }}</div>
+  <mat-spinner></mat-spinner>
+</ng-template>

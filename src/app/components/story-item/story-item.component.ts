@@ -35,6 +35,7 @@ export class StoryItemComponent implements OnInit {
       select(StorySelectors.selectStoryItemByID(this.storyID))
     );
 
+    // TODO: Refactor loading logic once story item component state is implemented
     this.expanded$.pipe(
       filter(expanded => expanded === true),
       first()

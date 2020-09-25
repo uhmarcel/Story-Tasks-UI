@@ -66,7 +66,6 @@ export const selectStoryIDsByStatus = (status: Status) => createSelector(
   storiesByStatus => storiesByStatus[status]
 );
 
-
 export const selectAreChildStoriesLoaded = parentID => createSelector(
   selectStoryEntities,
   entities => entities[parentID].children.reduce(
