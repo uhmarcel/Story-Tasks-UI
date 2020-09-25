@@ -9,6 +9,7 @@ import {StorySelectors} from '../../store/selectors';
 import {StoryActions} from '../../store/actions';
 import {StoryEditorComponent} from '../../components/dialogs/story-editor/story-editor.component';
 import {OktaAuthService} from '@okta/okta-angular';
+import {CONSTANTS} from '../../config/constants.config';
 
 @Component({
   selector: 'app-backlog',
@@ -17,12 +18,14 @@ import {OktaAuthService} from '@okta/okta-angular';
 })
 export class BacklogComponent {
 
-  public readonly storyIds$ = this.store.pipe(select(StorySelectors.selectStoryIds));
+  public readonly storyIds$ = this.store.pipe(
+    select(StorySelectors.selectStoryIDsByParentID(CONSTANTS.NO_PARENT))
+  );
 
   constructor(
     private readonly store: Store,
   ) {
-    const params: StoryItemParams = { parent: -1 };
+    const params: StoryItemParams = { parent: CONSTANTS.NO_PARENT };
     this.store.dispatch(StoryActions.loadStoryItems({ params }));
   }
 

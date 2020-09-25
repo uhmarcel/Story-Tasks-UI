@@ -66,6 +66,14 @@ export const selectStoryIDsByStatus = (status: Status) => createSelector(
   storiesByStatus => storiesByStatus[status]
 );
 
+export const selectStoryIDsByParentID = (parentID: number) => createSelector(
+  selectAllStoryItems,
+  (stories) => stories
+    .filter(story => story.parent === parentID)
+    .map(story => story.identifier.referenceId),
+
+);
+
 export const selectAreChildStoriesLoaded = parentID => createSelector(
   selectStoryEntities,
   entities => entities[parentID].children.reduce(

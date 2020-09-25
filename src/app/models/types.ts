@@ -1,3 +1,4 @@
+export const NO_PARENT = -1;
 
 export interface StoryItem {
   identifier: Identifier;
