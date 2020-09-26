@@ -1,12 +1,6 @@
 @import 'src/app/styles/variables';
 
 
-
-
-.story-id {
-  white-space: nowrap;
-}
-
 mat-expansion-panel {
   border-radius: 0 !important;
 
@@ -45,6 +39,7 @@ mat-expansion-panel {
       .story-id {
         margin: 0 $stk-space-small;
         font-size: $stk-font-size-small;
+        white-space: nowrap;
       }
     }
   }

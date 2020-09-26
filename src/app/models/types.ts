@@ -82,8 +82,8 @@ export const typeKeys = {
 // TODO: Proof of concept, delete once sorts are implemented on backend
 export const statusMap: Record<Status, number> = {
   IN_PROGRESS: 1,
-  TODO: 2,
-  ANALYSIS: 3,
+  TODO: 1,
+  ANALYSIS: 1,
   DONE: 4,
 };
 

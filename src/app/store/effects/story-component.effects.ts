@@ -12,16 +12,19 @@ import {combineIDs} from '../reducers/story-component.reducer';
 @Injectable()
 export class StoryComponentEffects {
 
-  loadAsync$ = createEffect(() =>
+  loadOne$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoryComponentActions.loadStoryComponent),
       map(({ containerID, storyID }) => {
         const component: StoryItemUI = JSON.parse(localStorage.getItem(combineIDs(containerID, storyID)));
         return component ? component : ({ containerID, storyID, isExpanded: false }) as StoryItemUI;
       }),
-      map(component => StoryComponentActions.createStoryComponent({ component }))
+      map(component => StoryComponentActions.loadStoryComponentsSuccess({ components: [component] }))
     )
   );
+
+  // loadMany$ = createEffect(() =>
+  // )
 
 
   constructor(
