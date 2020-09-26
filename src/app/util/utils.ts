@@ -1,4 +1,4 @@
-import {StoryItemParams} from '../models/types';
+import {StoryItemParams} from '../models';
 
 export function toRawParams(params: StoryItemParams): Record<string, string> {
   if (!params) { return null; }

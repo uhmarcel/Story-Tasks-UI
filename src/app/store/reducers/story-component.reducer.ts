@@ -1,7 +1,7 @@
 // Story Component State
 
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {StoryItem, StoryItemUI} from '../../models/types';
+import {StoryItem, StoryItemUI} from '../../models';
 import {createReducer, on} from '@ngrx/store';
 import {StoryComponentActions} from '../actions';
 import {storyAdapter} from './story.reducer';

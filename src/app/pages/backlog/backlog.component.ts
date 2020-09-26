@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {MatDialog} from '@angular/material/dialog';
 import {filter, first, map, switchMap, tap} from 'rxjs/operators';
-import {keyValue, StoryItem, StoryItemParams} from '../../models/types';
+import {keyValue, StoryItem, StoryItemParams} from '../../models';
 import {generateMockStory} from '../../util/generate-data';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../store/selectors';

@@ -1,4 +1,4 @@
-import {Status} from '../models/types';
+import {Status} from '../models';
 
 export const CONSTANTS = {
   NO_PARENT: -1

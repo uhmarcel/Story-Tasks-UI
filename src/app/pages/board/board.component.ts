@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {first, map, tap} from 'rxjs/operators';
-import {keyValue, Status, StoryItem, typeKeys} from '../../models/types';
+import {keyValue, Status, StoryItem, typeKeys} from '../../models';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../store/selectors';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';

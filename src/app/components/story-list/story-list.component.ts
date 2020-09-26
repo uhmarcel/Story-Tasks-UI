@@ -1,5 +1,4 @@
 import {Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
-import {StoryItem} from '../../models/types';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../store/selectors';
 import {concatMap, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';

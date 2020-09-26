@@ -1,4 +1,4 @@
-import { StoryItem, typeKeys, Task} from '../models/types';
+import { StoryItem, typeKeys, Task} from '../models';
 import * as faker from 'faker';
 
 

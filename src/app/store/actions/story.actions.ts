@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {Status, StoryItem, StoryItemParams, Task} from '../../models/types';
+import {Status, StoryItem, StoryItemParams, Task} from '../../models';
 // tslint:disable:max-line-length
 
 export const loadStoryItems = createAction('[Story Item API] Load story items', props<{ params?: StoryItemParams }>());

@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {getStoryId, storyAdapterSelectors, StoryState} from '../reducers/story.reducer';
-import {Status} from '../../models/types';
+import {Status} from '../../models';
 
 export const selectStoryState = createFeatureSelector<StoryState>('storyItems');
 

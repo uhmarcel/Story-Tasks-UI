@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import {keyValue, StoryItem} from '../../models/types';
+import {keyValue, StoryItem} from '../../models';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import * as StoryActions from '../actions/story.actions';
 

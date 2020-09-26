@@ -1,4 +1,3 @@
-
 export const colorMapping = {
   XXL: '#D6CDEA',
   XL: '#CBE4F9',

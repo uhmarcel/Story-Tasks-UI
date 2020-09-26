@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
-import {Color, Priority, Size, Status, StoryItem, Task, typeKeys} from '../../../models/types';
+import {Color, Priority, Size, Status, StoryItem, Task, typeKeys} from '../../../models';
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../../store/selectors';
 import {easeIn} from '../../../styles/animations';

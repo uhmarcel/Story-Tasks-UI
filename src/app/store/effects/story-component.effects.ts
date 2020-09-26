@@ -6,7 +6,7 @@ import {Store} from '@ngrx/store';
 import {MatDialog} from '@angular/material/dialog';
 import {StoryComponentActions} from '../actions';
 import {map} from 'rxjs/operators';
-import {StoryItemUI} from '../../models/types';
+import {StoryItemUI} from '../../models';
 import {combineIDs} from '../reducers/story-component.reducer';
 
 @Injectable()

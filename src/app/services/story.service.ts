@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Status, StoryItem} from '../models/types';
+import {Status, StoryItem} from '../models';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, concatMap, filter, first, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';

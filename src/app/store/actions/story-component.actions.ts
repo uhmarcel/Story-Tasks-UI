@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {StoryItemUI} from '../../models/types';
+import {StoryItemUI} from '../../models';
 // tslint:disable:max-line-length
 
 export const createStoryComponent = createAction('[Story Item UI] Create story component', props<{ component: StoryItemUI }>());
