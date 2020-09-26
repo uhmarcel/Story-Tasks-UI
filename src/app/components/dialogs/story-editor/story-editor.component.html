@@ -28,7 +28,7 @@
 
       <mat-form-field [appearance]="appearance">
         <mat-label>Description</mat-label>
-        <input matInput type="text" formControlName="description">
+        <textarea matInput rows="4" type="text" formControlName="description"></textarea>
         <mat-error *ngIf="formGroup.get('description').invalid">Please enter a valid description</mat-error>
       </mat-form-field>
 
