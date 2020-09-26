@@ -1,5 +1,5 @@
 <mat-accordion multi *ngIf="storyIDs; else loading">
-  <ng-container *ngFor="let id of storyIDs">
+  <ng-container *ngFor="let id of sortedIDs$ | async">
       <app-story-item
         [storyID]="id"
         [showStatus]="showStatus"
