@@ -11,6 +11,7 @@ mat-expansion-panel {
   border-radius: 0 !important;
 
   mat-expansion-panel-header {
+    background: transparent !important;
     padding: 0;
 
     .story-summary-container {
