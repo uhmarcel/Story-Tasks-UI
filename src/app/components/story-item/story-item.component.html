@@ -1,7 +1,8 @@
 <mat-expansion-panel
-  (opened)="this.expanded$.next(true)"
-  (closed)="this.expanded$.next(false)"
-  [ngClass]="{ collapsed: !this.expanded$.getValue() }"
+  [expanded]="(isExpanded$ | async) === true"
+  (opened)="toggleExpansion(true)"
+  (closed)="toggleExpansion(false)"
+  [ngClass]="{ collapsed: (isExpanded$ | async) === false }"
   [disabled]="!(storyItem$ | async)"
   [ngStyle]="(storyItem$ | async)?.color | colorStyle"
   [@easeIn]
@@ -12,7 +13,7 @@
     <div class="story-summary-container">
 
       <ng-container *ngIf="story; else loading">
-        <button class="priority-icon" mat-icon-button (click)="debug(story)">
+        <button class="priority-icon" mat-icon-button (click)="openEditor(story)">
           <mat-icon [svgIcon]="story.priority"></mat-icon>
         </button>
 
@@ -53,9 +54,7 @@
       </div>
 
       <div class="story-children" *ngIf="story.children && story.children.length > 0">
-        <app-story-list
-          [storyIDs]="story.children"
-        ></app-story-list>
+        <app-story-list [componentID]="componentID" [storyIDs]="story.children"></app-story-list>
       </div>
     </div>
   </ng-template>

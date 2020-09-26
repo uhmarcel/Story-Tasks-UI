@@ -3,6 +3,7 @@
   <div class="list-container">
 
       <app-story-list
+        [componentID]="'backlog'"
         [storyIDs]="storyIds$ | async"
         [showStatus]="true"
       ></app-story-list>

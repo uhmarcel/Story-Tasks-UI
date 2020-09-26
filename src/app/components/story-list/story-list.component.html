@@ -1,6 +1,7 @@
 <mat-accordion multi *ngIf="storyIDs; else loading">
   <ng-container *ngFor="let id of sortedIDs$ | async">
       <app-story-item
+        [containerID]="componentID"
         [storyID]="id"
         [showStatus]="showStatus"
         [cdkDragStartDelay]="0"

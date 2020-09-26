@@ -7,7 +7,7 @@ import {StorySelectors} from '../../../store/selectors';
 import {easeIn} from '../../../styles/animations';
 import {DEFAULTS} from '../../../config/constants.config';
 import {StoryActions} from '../../../store/actions';
-import {selectItemId} from '../../../store/reducers/story.reducer';
+import {getStoryId} from '../../../store/reducers/story.reducer';
 
 export enum EditorType {
   CREATE = 'Create',
@@ -58,7 +58,7 @@ export class StoryEditorComponent {
   }
 
   deleteStory() {
-    const storyID = selectItemId(this.data);
+    const storyID = getStoryId(this.data);
     this.store.dispatch(
       StoryActions.deleteStoryItem({ storyID })
     );

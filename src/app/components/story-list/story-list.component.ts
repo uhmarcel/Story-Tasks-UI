@@ -6,7 +6,7 @@ import {concatMap, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 import {StoryActions} from '../../store/actions';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
-import {selectItemId} from '../../store/reducers/story.reducer';
+import {getStoryId} from '../../store/reducers/story.reducer';
 
 @Component({
   selector: 'app-story-list',
@@ -15,6 +15,7 @@ import {selectItemId} from '../../store/reducers/story.reducer';
 })
 export class StoryListComponent implements OnInit, OnChanges {
 
+  @Input() public readonly componentID: string;
   @Input() public readonly storyIDs: number[];
   @Input() public readonly showStatus = true;
 
@@ -33,7 +34,7 @@ export class StoryListComponent implements OnInit, OnChanges {
           const sorted = [];
 
           stories.forEach(story => {
-            const id = selectItemId(story);
+            const id = getStoryId(story);
             if (set.has(id)) {
               sorted.push(id);
               set.delete(id);

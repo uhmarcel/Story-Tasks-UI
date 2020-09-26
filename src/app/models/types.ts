@@ -1,5 +1,11 @@
 export const NO_PARENT = -1;
 
+export interface StoryItemUI {
+  containerID: string;
+  storyID: number;
+  isExpanded?: boolean;
+}
+
 export interface StoryItem {
   identifier: Identifier;
   parent: number;

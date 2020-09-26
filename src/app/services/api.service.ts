@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { StoryItem, StoryItemParams } from '../models/types';
 import { toRawParams } from '../util/utils';
-import {selectItemId} from '../store/reducers/story.reducer';
+import {getStoryId} from '../store/reducers/story.reducer';
 
 
 @Injectable({
@@ -26,7 +26,7 @@ export class ApiService {
   }
 
   public updateStoryItem(story: StoryItem) {
-    const endpoint = `${environment.backendUrl}/api/v1/stories/${selectItemId(story)}`;
+    const endpoint = `${environment.backendUrl}/api/v1/stories/${getStoryId(story)}`;
     return this.httpClient.put<StoryItem[]>(endpoint, story);
   }
 
