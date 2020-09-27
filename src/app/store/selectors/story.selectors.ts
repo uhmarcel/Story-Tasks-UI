@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {getStoryId, storyAdapterSelectors, StoryState} from '../reducers/story.reducer';
-import {Status} from '../../models';
+import {Status, StoryItem} from '../../models';
 
 export const selectStoryState = createFeatureSelector<StoryState>('storyItems');
 
@@ -32,7 +32,7 @@ export const selectIsLoading = createSelector(
 export const selectStoryItemsGroupByStatus = createSelector(
   selectAllStoryItems,
   stories => stories.reduce(
-    (byStatus, story) => {
+    (byStatus: Record<Status, StoryItem[]>, story) => {
       byStatus[story.status].push(story);
       return byStatus;
     },
@@ -42,8 +42,8 @@ export const selectStoryItemsGroupByStatus = createSelector(
 
 export const selectStoryIDsGroupByStatus = createSelector(
   selectAllStoryItems,
-  stories => stories.reduce(
-    (byStatus, story) => {
+  (stories) => stories.reduce(
+    (byStatus: Record<Status, number[]>, story) => {
       byStatus[story.status].push(getStoryId(story));
       return byStatus;
     },

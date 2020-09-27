@@ -1,4 +1,4 @@
-import {Identifier, Priority, Size, Status, Task} from './';
+import {Identifier, Priority, Size, Status, statusMap, Task} from './';
 
 export interface StoryItem {
   identifier: Identifier;
@@ -18,15 +18,7 @@ export interface StoryItem {
 export const typeKeys = {
   priorities: ['BLOCKER', 'CRITICAL', 'VERY_HIGH', 'HIGH', 'MEDIUM', 'LOW', 'VERY_LOW', 'OPTIONAL'] as Priority[],
   sizes: ['XXL', 'XL', 'L', 'M', 'S'] as Size[],
-  statuses: ['ANALYSIS', 'TODO', 'IN_PROGRESS', 'DONE'] as Status[],
-};
-
-// TODO: Proof of concept, delete once sorts are implemented on backend
-export const statusMap: Record<Status, number> = {
-  IN_PROGRESS: 1,
-  TODO: 1,
-  ANALYSIS: 1,
-  DONE: 4,
+  statuses: ['ANALYSIS', 'READY', 'TODO', 'IN_PROGRESS', 'DONE'] as Status[],
 };
 
 export const keyValue = {

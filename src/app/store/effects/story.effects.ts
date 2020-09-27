@@ -32,8 +32,6 @@ export class StoryEffects {
   );
 
   // TODO: Urgent!! Update to use MERGEMAP / CONCATMAP
-
-
   loadStories$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoryActions.loadStoryItems),
