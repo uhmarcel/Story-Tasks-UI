@@ -1,8 +1,6 @@
 <mat-expansion-panel
-  [expanded]="(isExpanded$ | async) === true"
-  (opened)="toggleExpansion(true)"
-  (closed)="toggleExpansion(false)"
-  [ngClass]="{ collapsed: (isExpanded$ | async) === false }"
+  [expanded]="initialIsExpanded$ | async"
+  (expandedChange)="toggleExpansion($event)"
   [disabled]="!(storyItem$ | async)"
   [ngStyle]="(storyItem$ | async)?.color | colorStyle"
   [@easeIn]

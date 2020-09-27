@@ -22,6 +22,7 @@ import {LoginComponent} from './pages/login/login.component';
 import {StoryEditorComponent} from './components/dialogs/story-editor/story-editor.component';
 import { ColorStylePipe } from './pipes/color-style/color-style.pipe';
 import {AuthComponent} from './pages/auth/auth.component';
+import {storageMetaReducer} from './store/reducers/storage.metareducer';
 
 @NgModule({
   declarations: [
@@ -47,8 +48,10 @@ import {AuthComponent} from './pages/auth/auth.component';
     DragDropModule,
     ReactiveFormsModule,
     ReactiveComponentModule,
-    StoreModule.forRoot(applicationReducers),
-    EffectsModule.forRoot(applicationEffects)
+    EffectsModule.forRoot(applicationEffects),
+    StoreModule.forRoot(applicationReducers, {
+      metaReducers: [storageMetaReducer]
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

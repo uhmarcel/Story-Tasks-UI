@@ -1,7 +1,7 @@
 import {OktaAuthService} from '@okta/okta-angular';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, filter, map, mergeMap, tap, withLatestFrom} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {from, of} from 'rxjs';
 import {AuthActions} from '../actions';
 import {User} from '../../models';
 import {Injectable} from '@angular/core';
@@ -17,21 +17,22 @@ export class AuthEffects {
       ofType(AuthActions.hydrateUser),
       withLatestFrom(this.store.select(AuthSelectors.selectUser)),
       filter(([_, user]) => user == null),
-      mergeMap(() => of(this.authService.getUser()).pipe(
+      mergeMap(() => from(this.authService.getUser()).pipe(
         map((claims: any) => AuthActions
-          .hydrateUserSuccess({
+          .hydrateUserSuccess({ user: {
             id: claims?.sub,
             name: claims?.given_name,
             lastName: claims?.family_name,
             email: claims?.email,
             emailVerified: claims?.email_verified,
             locale: claims?.locale
-          } as User)),
+          } as User })),
         catchError(error => of(AuthActions.signOut))
       ))
     )
   );
 
+  // TODO: Figure if this observable is emitting when the session expires
   authChangeOut$ = createEffect(() =>
     this.authService.$authenticationState.pipe(
      filter(isAuthenticated => isAuthenticated === false),

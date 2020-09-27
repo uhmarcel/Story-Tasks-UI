@@ -1,5 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {storyComponentAdapterSelectors, StoryComponentState} from '../reducers/story-component.reducer';
+import {composeComponentID, StoryItemUI} from '../../models';
 
 export const selectStoryComponentState = createFeatureSelector<StoryComponentState>('storyItemComponents');
 
@@ -23,12 +24,17 @@ export const selectStoryComponentCount = createSelector(
   storyComponentAdapterSelectors.selectTotal
 );
 
-export const selectStoryComponentById = (id: string) => createSelector(
+export const selectStoryComponentById = (containerID: string, storyID: number) => createSelector(
   selectStoryComponentEntities,
-  (entities) => entities[id]
+  (entities) => {
+    const componentID = composeComponentID(containerID, storyID);
+    return entities[componentID]
+      ? entities[componentID]
+      : new StoryItemUI(containerID, storyID, null);
+  }
 );
 
-export const selectIsExpanded = (id: string) => createSelector(
-  selectStoryComponentById(id),
+export const selectIsExpanded = (containerID: string, storyID) => createSelector(
+  selectStoryComponentById(containerID, storyID),
   (component) => component.isExpanded
 );

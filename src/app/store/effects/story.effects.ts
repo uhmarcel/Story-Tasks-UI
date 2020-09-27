@@ -64,9 +64,10 @@ export class StoryEffects {
         withLatestFrom(this.store.select(StorySelectors.selectAreChildStoriesLoaded(action.parentID)))
       )),
       filter(([_, areLoaded]) => areLoaded === false),
-      switchMap(([{ parentID }, _]) => this.apiService.getStoryItems({ parent: parentID })),
-      map(storyItems => StoryActions.loadStoryItemsSuccess({ storyItems })),
-      catchError(error => of(StoryActions.loadStoryItemsFailure({ error })))
+      mergeMap(([{ parentID }]) => this.apiService.getStoryItems({ parent: parentID }).pipe(
+        map(storyItems => StoryActions.loadStoryItemsSuccess({ storyItems })),
+        catchError(error => of(StoryActions.loadStoryItemsFailure({ error })))
+      ))
     )
   );
 

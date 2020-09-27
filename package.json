@@ -28,7 +28,9 @@
     "@okta/okta-angular": "^2.2.0",
     "@okta/okta-signin-widget": "^4.4.4",
     "@types/faker": "^5.1.0",
+    "deepmerge": "^4.2.2",
     "faker": "^5.1.0",
+    "lodash": "^4.17.20",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

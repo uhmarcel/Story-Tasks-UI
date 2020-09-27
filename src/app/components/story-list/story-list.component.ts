@@ -2,9 +2,7 @@ import {Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core'
 import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../store/selectors';
 import {concatMap, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
-import {StoryActions} from '../../store/actions';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
-import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {getStoryId} from '../../store/reducers/story.reducer';
 
 @Component({
@@ -47,7 +45,6 @@ export class StoryListComponent implements OnInit, OnChanges {
         })
       ))
     );
-
   }
 
   ngOnInit() {

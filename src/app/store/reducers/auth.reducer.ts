@@ -13,7 +13,7 @@ export const initialAuthState = {
 
 export const authReducer = createReducer<AuthState>(
   initialAuthState,
-  on(AuthActions.hydrateUserSuccess, (state, user) => {
+  on(AuthActions.hydrateUserSuccess, (state, { user }) => {
     const nextState = {
       ...state,
       user

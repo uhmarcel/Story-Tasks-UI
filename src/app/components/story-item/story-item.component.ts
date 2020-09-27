@@ -1,16 +1,14 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {StoryItem} from '../../models';
+import {composeComponentID, StoryItem, StoryItemUI} from '../../models';
 import {StoryIdPipe} from '../../pipes/story-id/story-id.pipe';
 import {colorMapping} from '../../util/color-mapping';
 import {select, Store} from '@ngrx/store';
 import {StoryComponentSelectors, StorySelectors} from '../../store/selectors';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, first, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {delay, distinctUntilChanged, filter, first, map, switchMap, take, tap, withLatestFrom} from 'rxjs/operators';
 import {StoryActions, StoryComponentActions} from '../../store/actions';
 import {MatSelectionListChange} from '@angular/material/list';
 import {easeIn} from '../../styles/animations';
-import {combineIDs} from '../../store/reducers/story-component.reducer';
-import {MatExpansionPanel} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-story-item',
@@ -27,32 +25,53 @@ export class StoryItemComponent implements OnInit {
   public componentID: string;
   public storyItem$: Observable<StoryItem>;
   public isExpanded$: Observable<boolean>;
+  public initialIsExpanded$: Observable<boolean>;
+  private expandedChange$: BehaviorSubject<boolean>;
 
   // public readonly colorMap = colorMapping;
 
   constructor(private readonly store: Store) {}
 
   ngOnInit() {
-    this.componentID = combineIDs(this.containerID, this.storyID);
+    this.componentID = composeComponentID(this.containerID, this.storyID);
 
-    this.store.dispatch(
-      StoryComponentActions.loadStoryComponent({ containerID: this.containerID, storyID: this.storyID })
-    );
+    this.expandedChange$ = new BehaviorSubject(null);
 
     this.storyItem$ = this.store.pipe(
       select(StorySelectors.selectStoryItemByID(this.storyID))
     );
 
     this.isExpanded$ = this.store.pipe(
-      select(StoryComponentSelectors.selectIsExpanded(this.componentID))
+      select(StoryComponentSelectors.selectIsExpanded(this.containerID, this.storyID)),
     );
 
-    this.isExpanded$.subscribe(x => console.log(this.componentID));
+    this.initialIsExpanded$ = combineLatest([ this.isExpanded$, this.storyItem$ ]).pipe(
+      filter(([ isExpanded, storyItem ]) => !!isExpanded && !!storyItem),
+      map(([ isExpanded ]) => isExpanded),
+      first(),
+      delay(500),
+    );
 
+    this.expandedChange$.pipe(
+      withLatestFrom(this.isExpanded$),
+      filter(([ change, isExpanded ]) => change != null && change !== isExpanded),
+      map(([ nextIsExpanded ]) => nextIsExpanded)
+    ).subscribe(isExpanded => {
+      this.store.dispatch(
+        StoryComponentActions.updateStoryComponent({
+          component: {
+            containerID: this.containerID,
+            storyID: this.storyID,
+            isExpanded
+          } as StoryItemUI
+        })
+      );
+    });
 
     // TODO: Refactor loading logic once story item component state is implemented
     this.isExpanded$.pipe(
       filter(expanded => expanded === true),
+
       first()
     ).subscribe(() =>
       this.store.dispatch(StoryActions.loadStoryItemsByParentID({
@@ -80,8 +99,6 @@ export class StoryItemComponent implements OnInit {
   }
 
   toggleExpansion(isExpanded: boolean) {
-    this.store.dispatch(
-      StoryComponentActions.toggleIsExpanded({ componentID: this.componentID, isExpanded })
-    );
+    this.expandedChange$.next(isExpanded);
   }
 }
