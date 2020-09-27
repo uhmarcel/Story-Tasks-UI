@@ -24,6 +24,11 @@ export const selectStoryItemsCount = createSelector(
   storyAdapterSelectors.selectTotal
 );
 
+export const selectIsLoading = createSelector(
+  selectStoryState,
+  (state) => state.isLoading
+);
+
 export const selectStoryItemsGroupByStatus = createSelector(
   selectAllStoryItems,
   stories => stories.reduce(
@@ -74,6 +79,7 @@ export const selectStoryIDsByParentID = (parentID: number) => createSelector(
 
 );
 
+// TODO: Refactor - Maybe to its own service?
 export const selectAreChildStoriesLoaded = parentID => createSelector(
   selectStoryEntities,
   entities => entities[parentID].children.reduce(
@@ -82,12 +88,12 @@ export const selectAreChildStoriesLoaded = parentID => createSelector(
   ),
 );
 
-const initByStatusDictionary = () => Object.keys(Status).reduce(
-  (dictionary, status) => {
+const initByStatusDictionary = () => Object
+  .keys(Status)
+  .reduce((dictionary, status) => {
     dictionary[status] = [];
     return dictionary;
-  }, {}
-);
+  }, {});
 
 
 

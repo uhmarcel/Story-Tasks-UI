@@ -1,14 +1,23 @@
 <div class="page-container">
 
-  <div class="list-container">
-
+  <div class="list-container" *ngIf="!(loading$ | async); else loading">
       <app-story-list
         [componentID]="'backlog'"
         [storyIDs]="storyIds$ | async"
         [showStatus]="true"
       ></app-story-list>
-
   </div>
+
+
+  <ng-template #loading>
+    <div class="loading-container">
+      <mat-spinner [diameter]="40"></mat-spinner>
+    </div>
+  </ng-template>
+
+  <ng-template #error>
+<!-- TODO: Add error template -->
+  </ng-template>
 
   <!-- For debug - TODO: remove when no longer needed -->
   <div style="display: flex; justify-content: center; margin-top: 16px">

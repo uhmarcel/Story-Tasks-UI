@@ -16,9 +16,11 @@ export class BacklogComponent {
     select(StorySelectors.selectStoryIDsByParentID(CONSTANTS.NO_PARENT))
   );
 
-  constructor(
-    private readonly store: Store,
-  ) {
+  public readonly loading$ = this.store.pipe(
+    select(StorySelectors.selectIsLoading)
+  );
+
+  constructor(private readonly store: Store) {
     const params: StoryItemParams = { parent: CONSTANTS.NO_PARENT };
     this.store.dispatch(StoryActions.loadStoryItems({ params }));
   }
