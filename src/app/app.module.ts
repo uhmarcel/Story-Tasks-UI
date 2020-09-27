@@ -21,6 +21,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {LoginComponent} from './pages/login/login.component';
 import {StoryEditorComponent} from './components/dialogs/story-editor/story-editor.component';
 import { ColorStylePipe } from './pipes/color-style/color-style.pipe';
+import {AuthComponent} from './pages/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ColorStylePipe } from './pipes/color-style/color-style.pipe';
     StoryListComponent,
     LoginComponent,
     ColorStylePipe,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,3 +7,4 @@ export * from './StoryItem';
 export * from './StoryItemParams';
 export * from './StoryItemUI';
 export * from './Task';
+export * from './User';

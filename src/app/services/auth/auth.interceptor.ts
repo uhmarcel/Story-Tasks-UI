@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const accessToken = await this.oktaAuth.getAccessToken();
     request = request.clone({
       setHeaders: {
-        Authorization: 'Bearer ' + accessToken
+        Authorization: `Bearer ${accessToken}`
       }
     });
     return next.handle(request).toPromise();

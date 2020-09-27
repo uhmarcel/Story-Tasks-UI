@@ -9,6 +9,7 @@ import {OKTA_CONFIG, OktaAuthGuard, OktaAuthModule, OktaCallbackComponent} from 
 import {oicdConfig} from './config/oicd.config';
 import {AuthInterceptor} from './services/auth/auth.interceptor';
 import {AuthGuard} from './services/auth/auth.guard';
+import {AuthComponent} from './pages/auth/auth.component';
 
 // TODO: Add lazy loading
 // TODO: Use sign in widget & clean routes
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'backlog', pathMatch: 'full', canActivate: [ AuthGuard ]},
   { path: 'backlog', component: BacklogComponent, canActivate: [ AuthGuard] },
   { path: 'board', component: BoardComponent, canActivate: [ AuthGuard] },
-  { path: 'auth-callback', component: OktaCallbackComponent },
+  { path: 'auth-callback', component: AuthComponent },
   { path: 'login', component: LoginComponent },
 ];
 

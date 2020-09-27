@@ -5,7 +5,7 @@ import {filter, first, map, switchMap, tap} from 'rxjs/operators';
 import {keyValue, StoryItem, StoryItemParams} from '../../models';
 import {generateMockStory} from '../../util/generate-data';
 import {select, Store} from '@ngrx/store';
-import {StorySelectors} from '../../store/selectors';
+import {AuthSelectors, StorySelectors} from '../../store/selectors';
 import {StoryActions} from '../../store/actions';
 import {StoryEditorComponent} from '../../components/dialogs/story-editor/story-editor.component';
 import {OktaAuthService} from '@okta/okta-angular';
@@ -27,6 +27,7 @@ export class BacklogComponent {
   ) {
     const params: StoryItemParams = { parent: CONSTANTS.NO_PARENT };
     this.store.dispatch(StoryActions.loadStoryItems({ params }));
+    this.store.pipe(select(AuthSelectors.selectAuthState)).subscribe(x => console.log('From backlog: ', x));
   }
 
   generateRandomStory() {

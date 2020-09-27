@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import {Store} from '@ngrx/store';
-import {StoryActions} from '../../store/actions';
-import {OktaAuthService} from '@okta/okta-angular';
-import {Observable} from 'rxjs';
-import {ActivatedRoute, NavigationEnd, Router, RouterEvent} from '@angular/router';
-import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
+import {AuthActions, StoryActions} from '../../store/actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,14 +10,9 @@ import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
 })
 export class NavBarComponent {
 
-  public readonly isAuthenticated$: Observable<boolean>;
-
-  // TODO: Fix authentication -> avoid refreshes, move to state.
   constructor(
-    private readonly store: Store,
-    private readonly authService: OktaAuthService,
-    private readonly activatedRoute: ActivatedRoute,
-    public readonly router: Router
+    public readonly router: Router,
+    private readonly store: Store
   ) {}
 
   openStoryEditor() {
@@ -28,7 +20,7 @@ export class NavBarComponent {
   }
 
   signOut() {
-    this.authService.logout();
+    this.store.dispatch(AuthActions.signOut());
   }
 
 }
