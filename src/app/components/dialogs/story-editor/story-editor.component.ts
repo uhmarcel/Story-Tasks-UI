@@ -8,6 +8,7 @@ import {easeIn} from '../../../styles/animations';
 import {DEFAULTS} from '../../../config/constants.config';
 import {StoryActions} from '../../../store/actions';
 import {getStoryId} from '../../../store/reducers/story.reducer';
+import {map, tap} from 'rxjs/operators';
 
 export enum EditorType {
   CREATE = 'Create',
@@ -31,7 +32,10 @@ export class StoryEditorComponent {
   public readonly typeKeys = typeKeys;
   public formGroup: FormGroup;
 
-  public readonly allStoryIds$ = this.store.pipe(select(StorySelectors.selectStoryIds));
+  public readonly allStoryIds$ = this.store.pipe(
+    select(StorySelectors.selectStoryIds),
+    map((storyIds: number[]) => [...storyIds].sort((a, b) => a - b)),
+  );
   public readonly editorType: EditorType;
 
   constructor(
