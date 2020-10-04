@@ -23,6 +23,7 @@ import {StoryEditorComponent} from './components/dialogs/story-editor/story-edit
 import { ColorStylePipe } from './pipes/color-style/color-style.pipe';
 import {AuthComponent} from './pages/auth/auth.component';
 import {storageMetaReducer} from './store/reducers/storage.metareducer';
+import { PageNavigationComponent } from './components/page-navigation/page-navigation.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {storageMetaReducer} from './store/reducers/storage.metareducer';
     LoginComponent,
     ColorStylePipe,
     AuthComponent,
+    PageNavigationComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 
-export class StoryItemUI {
+export class StoryItemState {
 
   containerID: string;
   storyID: number;
@@ -17,7 +17,7 @@ export const composeComponentID = (containerID: string, storyID: number) => {
   return `${containerID}:${storyID}`;
 };
 
-export const selectComponentID = (component: StoryItemUI): string => {
+export const selectComponentID = (component: StoryItemState): string => {
   return composeComponentID(component.containerID, component.storyID);
 };
 

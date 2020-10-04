@@ -1,10 +1,11 @@
 @import '../../styles/variables';
 
 .page-container {
+  padding: $stk-space-medium 0;
 
   .list-container {
     max-width: 1000px;
-    margin: $stk-space-small auto;
+    margin: 0 auto;
   }
 
   .loading-container {

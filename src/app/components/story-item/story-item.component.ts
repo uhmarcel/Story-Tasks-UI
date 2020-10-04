@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {composeComponentID, StoryItem, StoryItemUI} from '../../models';
+import {composeComponentID, StoryItem, StoryItemState} from '../../models';
 import {StoryIdPipe} from '../../pipes/story-id/story-id.pipe';
 import {colorMapping} from '../../util/color-mapping';
 import {select, Store} from '@ngrx/store';
@@ -63,7 +63,7 @@ export class StoryItemComponent implements OnInit {
             containerID: this.containerID,
             storyID: this.storyID,
             isExpanded
-          } as StoryItemUI
+          } as StoryItemState
         })
       );
     });

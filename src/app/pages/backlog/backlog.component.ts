@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import {keyValue, StoryItem, StoryItemParams} from '../../models';
+import {keyValue, MenuItem, StoryItem, StoryItemParams} from '../../models';
 import {select, Store} from '@ngrx/store';
 import {AuthSelectors, StoryComponentSelectors, StorySelectors} from '../../store/selectors';
 import {StoryActions} from '../../store/actions';
 import {CONSTANTS} from '../../config/constants.config';
+
+export const BACKLOG_PAGE_MENU_ITEM: MenuItem = {
+  route: '/backlog',
+  title: 'Backlog'
+};
 
 @Component({
   selector: 'app-backlog',

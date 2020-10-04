@@ -1,17 +1,42 @@
 @import 'src/app/styles/variables';
 
+
+
 .nav-bar {
-  position: fixed;
+  position: absolute;
   z-index: 2;
   top: 0;
-  left: 0;
-  right: 0;
   background-color: $stk-primary-color;
   height: $stk-header-height !important;
+  width: 100%;
   padding: 0;
+  //border-bottom: 1px solid $stk-border-light;
 
-  .nav-logo {
-    width: 32px;
+  .menu-button {
+    margin-left: $stk-space-medium;
+
+    .mat-icon {
+      font-size: 28px;
+      width: 100%;
+      padding-bottom: 3px;
+    }
+  }
+
+  .menu-title {
+    margin-left: $stk-space-medium;
+    font-size: $stk-font-size-large;
+    line-height: 0;
+  }
+
+  .logo-container {
+    padding: 0 $stk-space-small;
+    img {
+      width: 32px;
+    }
+    span {
+      margin-left: $stk-space-small;
+      font-size: 0.95rem;
+    }
   }
 
   .nav-title {
@@ -19,17 +44,15 @@
     font-size: 1rem;
   }
 
-  .nav-item {
-    height: 100%;
-    padding: 0 $stk-space-medium;
-    border-radius: 0;
-    margin: auto 0;
+  .nav-item {}
 
-    span {
-      display: inline-block;
-      //margin-top: $stk-space-extra-small;
-      //font-size: $stk-font-size-medium;
-    }
+  .nav-account {
+    border-left: 1px solid $stk-border-light !important;
+    color: $stk-font-color-secondary;
+  }
+
+  .nav-action {
+    margin-right: $stk-space-small;
   }
 
 }

@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {AuthActions, StoryActions} from '../../store/actions';
 import { Router } from '@angular/router';
+import {AuthSelectors} from '../../store/selectors';
+import {Observable} from 'rxjs';
+import {NavigationMenuService} from '../../services/navigation-menu.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,7 +13,12 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent {
 
+  public user$ = this.store.pipe(
+    select(AuthSelectors.selectUser)
+  );
+
   constructor(
+    public readonly menuService: NavigationMenuService,
     public readonly router: Router,
     private readonly store: Store
   ) {}

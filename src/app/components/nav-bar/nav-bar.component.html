@@ -1,34 +1,51 @@
 <mat-toolbar class="nav-bar mat-elevation-z5">
 
-  <button mat-button routerLink="/" routerLinkActive="active" class="nav-item">
-    <img src="./assets/logo.svg" class="nav-logo">
-    <span class="nav-title">
-      Story Tasks
-    </span>
-  </button>
+  <ng-container *ngIf="menuService.shouldDisplayMenu$ | async; else default">
+    <button mat-icon-button
+            class="menu-button"
+            *ngIf="!(menuService.isSideMenuOpen$ | async)"
+            (click)="menuService.toggleSideMenu(true)">
+      <mat-icon>
+        menu
+      </mat-icon>
+    </button>
 
-  <button mat-button routerLink="/backlog" routerLinkActive="active" class="nav-item">
-    <span>
-      Backlog
-    </span>
-  </button>
+    <div class="menu-title">
+      {{ menuService.menuTitle$ | async }}
+    </div>
 
-  <button mat-button routerLink="/board" routerLinkActive="active" class="nav-item">
-    <span>
-      Board
-    </span>
-  </button>
+    <span class="pull-right"></span>
 
-  <span class="pull-right"></span>
+    <ng-container *ngFor="let menuAction of menuService.menuActions$ | async">
+      <button mat-icon-button (click)="menuAction.action()" class="nav-action">
+        <mat-icon>
+          {{ menuAction.icon }}
+        </mat-icon>
+      </button>
+    </ng-container>
 
-  <button mat-button (click)="signOut()" class="nav-item" *ngIf="router.url !== '/login'">
-    <span>
-      Sign out
-    </span>
-  </button>
 
-  <button mat-icon-button (click)="openStoryEditor()">
-    <mat-icon>add</mat-icon>
-  </button>
+    <div class="nav-account" *ngIf="user$ | async as user">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+        {{ user.name }}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu" yPosition="below">
+        <button mat-menu-item (click)="signOut()">Sign out</button>
+      </mat-menu>
+    </div>
+  </ng-container>
+
+  <ng-template #default>
+    <button mat-button
+            routerLink="/"
+            routerLinkActive="active"
+            class="logo-container">
+      <img src="./assets/logo.svg">
+      <span>Story Tasks</span>
+    </button>
+  </ng-template>
 
 </mat-toolbar>

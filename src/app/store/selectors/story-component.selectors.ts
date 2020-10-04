@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {storyComponentAdapterSelectors, StoryComponentState} from '../reducers/story-component.reducer';
-import {composeComponentID, StoryItemUI} from '../../models';
+import {composeComponentID, StoryItemState} from '../../models';
 
 export const selectStoryComponentState = createFeatureSelector<StoryComponentState>('storyItemComponents');
 
@@ -30,7 +30,7 @@ export const selectStoryComponentById = (containerID: string, storyID: number) =
     const componentID = composeComponentID(containerID, storyID);
     return entities[componentID]
       ? entities[componentID]
-      : new StoryItemUI(containerID, storyID, null);
+      : new StoryItemState(containerID, storyID, null);
   }
 );
 

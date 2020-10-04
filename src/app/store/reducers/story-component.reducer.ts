@@ -1,13 +1,13 @@
 // Story Component State
 
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {selectComponentID, StoryItem, StoryItemUI} from '../../models';
+import {selectComponentID, StoryItem, StoryItemState} from '../../models';
 import {createReducer, on} from '@ngrx/store';
 import {StoryComponentActions} from '../actions';
 
-export interface StoryComponentState extends EntityState<StoryItemUI> {}
+export interface StoryComponentState extends EntityState<StoryItemState> {}
 
-export const storyComponentAdapter: EntityAdapter<StoryItemUI> = createEntityAdapter<StoryItemUI>({
+export const storyComponentAdapter: EntityAdapter<StoryItemState> = createEntityAdapter<StoryItemState>({
   selectId: selectComponentID
 });
 

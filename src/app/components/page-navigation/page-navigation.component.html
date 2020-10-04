@@ -1,0 +1,50 @@
+<mat-sidenav-container class="full-size-container">
+  <mat-sidenav #sideNav
+               [mode]="sideNavMode$ | async"
+               [opened]="shouldStartOpened$ | async"
+               (openedChange)="menuService.toggleSideMenu($event)"
+               class="side-navigation">
+    <div class="side-navigation-header">
+      <button mat-button
+              routerLink="/"
+              routerLinkActive="active"
+              class="logo-container">
+        <img src="./assets/logo.svg">
+        <span>Story Tasks</span>
+      </button>
+
+      <button (click)="menuService.toggleSideMenu(false)"
+              class="close-button"
+              mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="side-navigation-list">
+      <div class="divider"></div>
+      <div *ngFor="let menuItem of menuService.menuItems"
+           [class.isActive]="(menuService.menuTitle$ | async) === menuItem.title"
+           (click)="router.navigate([menuItem.route])"
+           class="side-navigation-list-item">
+        {{ menuItem.title }}
+      </div>
+      <div class="divider"></div>
+      <div class="side-navigation-list-item">Preferences</div>
+      <div class="side-navigation-list-item" (click)="logout()">Logout</div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-nav-bar></app-nav-bar>
+
+    <div class="app-content">
+      <ng-content></ng-content>
+    </div>
+
+    <div class="app-footer">
+      uhmarcel
+      <img src="/assets/github.svg">
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

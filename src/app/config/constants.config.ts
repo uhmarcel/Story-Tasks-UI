@@ -1,6 +1,7 @@
 import {Status} from '../models';
 
 export const CONSTANTS = {
+  MOBILE_VIEW_BREAKPOINT: 786,
   NO_PARENT: -1
 };
 

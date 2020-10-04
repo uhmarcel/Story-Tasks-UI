@@ -1,4 +1,4 @@
-import { StoryItem, typeKeys, Task} from '../models';
+import {StoryItem, typeKeys, Task, Color, Status, Size, Priority} from '../models';
 import * as faker from 'faker';
 
 
@@ -10,9 +10,10 @@ export function generateMockStory(id: number, idPool: number[] = []): StoryItem 
    title: faker.name.title(),
    description: faker.lorem.paragraph(),
    tasks: generateTasks(4),
-   priority: pickOne(typeKeys.priorities),
-   size: pickOne(typeKeys.sizes),
-   status: pickOne(typeKeys.statuses),
+   priority: pickOne(Object.values(Priority)),
+   size: pickOne(Object.values(Size)),
+   status: pickOne(Object.values(Status)),
+   color: pickOne([...Object.values(Color), null])
  } as StoryItem;
 }
 

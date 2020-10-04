@@ -36,3 +36,8 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
+export const routeTitles = {
+  '/backlog': 'Backlog',
+  '/board': 'Board',
+};

@@ -1,7 +1,7 @@
 @import 'src/app/styles/variables';
 
 .page-container {
-  padding: $stk-space-extra-small;
+  padding: $stk-space-small $stk-space-extra-small;
 
   .columns {
     display: flex;
