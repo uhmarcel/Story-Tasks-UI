@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { StoryItem, StoryItemParams } from '../models';
-import { toRawParams } from '../util/utils';
+import {StoryItem, StoryItemParams, toRawParams} from '../models';
 import {getStoryId} from '../store/reducers/story.reducer';
 
 

@@ -34,12 +34,14 @@
 
       <mat-form-field [appearance]="appearance">
         <mat-label>Parent ID</mat-label>
-        <mat-select formControlName="parent">
-          <mat-option [value]="-1">None</mat-option>
-          <ng-container *ngFor="let id of allStoryIds$ | async">
-            <mat-option [value]="id">{{ id | storyId }}</mat-option>
-          </ng-container>
-        </mat-select>
+        <input type="text" matInput formControlName="parent" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option [value]="-1" >None</mat-option>
+            <mat-option *ngFor="let story of parentOptions$ | async"
+                        [value]="story.identifier.referenceId">
+              {{ story.title }}
+            </mat-option>
+          </mat-autocomplete>
         <mat-error *ngIf="formGroup.get('parent').invalid">Please choose an id</mat-error>
       </mat-form-field>
 

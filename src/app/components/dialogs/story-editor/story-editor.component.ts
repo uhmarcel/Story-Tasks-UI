@@ -8,7 +8,9 @@ import {easeIn} from '../../../styles/animations';
 import {DEFAULTS} from '../../../config/constants.config';
 import {StoryActions} from '../../../store/actions';
 import {getStoryId} from '../../../store/reducers/story.reducer';
-import {map, tap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, map, startWith, switchMap, tap} from 'rxjs/operators';
+import {ApiService} from '../../../services/api.service';
+import {Observable} from 'rxjs';
 
 export enum EditorType {
   CREATE = 'Create',
@@ -32,6 +34,7 @@ export class StoryEditorComponent {
   public readonly typeKeys = typeKeys;
   public formGroup: FormGroup;
 
+  public readonly parentOptions$: Observable<StoryItem[]>;
   public readonly allStoryIds$ = this.store.pipe(
     select(StorySelectors.selectStoryIds),
     map((storyIds: number[]) => [...storyIds].sort((a, b) => a - b)),
@@ -42,10 +45,19 @@ export class StoryEditorComponent {
     @Inject(MAT_DIALOG_DATA) public data: StoryItem,
     private readonly dialogRef: MatDialogRef<StoryEditorComponent>,
     private readonly formBuilder: FormBuilder,
+    private readonly apiService: ApiService,
     private readonly store: Store
   ) {
     this.editorType = this.data ? EditorType.EDIT : EditorType.CREATE;
     this.buildFormGroup(this.data);
+
+    this.parentOptions$ = this.formGroup.get('parent').valueChanges.pipe(
+      startWith(''),
+      map(search => search.trim().replace(/\s+/g, ' ')),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap((search: string) => this.apiService.getStoryItems({ search, size: 20 }))
+    );
   }
 
   submitStory() {
@@ -103,8 +115,11 @@ export class StoryEditorComponent {
       status: [story?.status || DEFAULTS.status, Validators.required],
       color: story?.color
     });
-
     story?.tasks?.forEach(task => this.addTask(task));
+  }
+
+  public parentDisplayFunction(story: any) {
+    return story?.title;
   }
 
 }
