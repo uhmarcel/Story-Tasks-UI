@@ -47,7 +47,9 @@
 
   .nav-account {
     border-left: 1px solid $stk-border-light !important;
-    color: $stk-font-color-secondary;
+    .mat-icon {
+      color: $stk-font-color-secondary;
+    }
   }
 
   .nav-action {

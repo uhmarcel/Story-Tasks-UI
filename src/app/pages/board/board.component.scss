@@ -1,9 +1,9 @@
 @import 'src/app/styles/variables';
 
 .page-container {
-  padding: $stk-space-small $stk-space-extra-small;
 
-  .columns {
+  .desktop-board-view {
+    padding: $stk-space-small $stk-space-extra-small;
     display: flex;
     width: 100%;
 
@@ -11,6 +11,31 @@
       flex: 1 1 0;
       width: 0;
       padding: $stk-space-extra-small;
+    }
+  }
+
+  .mobile-board-view {
+    .status-tab-group {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      &::ng-deep {
+        .mat-tab-header {
+          background-color: $stk-primary-color !important;
+          box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),0px 5px 8px 0px rgba(0, 0, 0, 0.14),0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+          z-index: 2;
+        }
+
+        .column {
+          padding: $stk-space-medium 0;
+        }
+
+        //.mat-tab-cont
+      }
+
     }
 
   }

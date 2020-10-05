@@ -6,6 +6,7 @@ import {select, Store} from '@ngrx/store';
 import {StorySelectors} from '../../store/selectors';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {StoryActions} from '../../store/actions';
+import {ResponsiveService} from '../../services/responsive.service';
 
 export const BOARD_PAGE_MENU_ITEM: MenuItem = {
   route: '/board',
@@ -19,13 +20,13 @@ export const BOARD_PAGE_MENU_ITEM: MenuItem = {
 })
 export class BoardComponent {
 
-  public readonly storiesByStatus$ = this.store.pipe(
-    select(StorySelectors.selectStoryIDsGroupByStatus)
-  );
-
+  public readonly storiesByStatus$ = this.store.pipe(select(StorySelectors.selectStoryIDsGroupByStatus));
   public readonly STATUS_KEYS = Object.keys(Status).filter(status => status !== Status.ANALYSIS);
 
-  constructor(private readonly store: Store) {
+  constructor(
+    public readonly responsiveService: ResponsiveService,
+    private readonly store: Store
+  ) {
     this.store.dispatch(StoryActions.loadStoryItems({}));
   }
 

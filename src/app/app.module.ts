@@ -24,6 +24,7 @@ import { ColorStylePipe } from './pipes/color-style/color-style.pipe';
 import {AuthComponent} from './pages/auth/auth.component';
 import {storageMetaReducer} from './store/reducers/storage.metareducer';
 import { PageNavigationComponent } from './components/page-navigation/page-navigation.component';
+import { NormalizeCasePipe } from './pipes/normalize-case/normalize-case.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { PageNavigationComponent } from './components/page-navigation/page-navig
     ColorStylePipe,
     AuthComponent,
     PageNavigationComponent,
+    NormalizeCasePipe,
   ],
   imports: [
     BrowserModule,
