@@ -27,7 +27,7 @@ export class StoryEffects {
   logError$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StoryActions.updateStoryItemFailure),
-      tap(({error}) => alert(error))
+      tap(({ error }) => alert(error.message))
     ), { dispatch: false }
   );
 

@@ -10,7 +10,7 @@
               routerLinkActive="active"
               class="logo-container">
         <img src="./assets/logo.svg">
-        <span>Story Tasks</span>
+        <span>{{ appTitle }}</span>
       </button>
 
       <button (click)="menuService.toggleSideMenu(false)"
@@ -42,8 +42,7 @@
     </div>
 
     <div class="app-footer">
-      uhmarcel
-      <img src="/assets/github.svg">
+      <span (click)="navigateToLink(appOwnerLink)">by {{ appOwner }}</span>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

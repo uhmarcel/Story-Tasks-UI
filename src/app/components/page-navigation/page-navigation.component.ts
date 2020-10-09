@@ -7,6 +7,7 @@ import {combineLatest, Observable} from 'rxjs';
 import {filter, first, map, tap} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import {AuthActions} from '../../store/actions';
+import {CONSTANTS} from '../../config/constants.config';
 
 @Component({
   selector: 'app-page-navigation',
@@ -14,6 +15,10 @@ import {AuthActions} from '../../store/actions';
   styleUrls: ['./page-navigation.component.scss']
 })
 export class PageNavigationComponent {
+
+  public readonly appTitle = CONSTANTS.APP_NAME;
+  public readonly appOwner = CONSTANTS.APP_OWNER;
+  public readonly appOwnerLink = CONSTANTS.APP_OWNER_LINK;
 
   @ViewChild('sideNav')
   private readonly sideNav: MatSidenav;
@@ -39,6 +44,10 @@ export class PageNavigationComponent {
       map(([isMobile, shouldDisplay]) => !isMobile && shouldDisplay),
       first()
     );
+  }
+
+  navigateToLink(url: string) {
+    window.open(url, '_blank');
   }
 
   logout() {

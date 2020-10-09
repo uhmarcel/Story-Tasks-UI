@@ -2,24 +2,32 @@
 
 .app-content {
   position: absolute;
+  left: 0;
+  right: 0;
   top: $stk-header-height;
   bottom: $stk-footer-height;
-  width: 100%;
   overflow-y: scroll;
 }
 
-.app-footer{
+.app-footer {
   position: absolute;
+  display: flex;
   bottom: 0;
   width: 100%;
   border-top: 1px solid $stk-border-light;
   background-color: $stk-primary-color;
-  color: transparent;
+  font-size: $stk-font-size-medium;
+  color: #0007;
+  height: $stk-footer-height;
+  box-sizing: border-box;
 
-  img {
-    display: none;
-    height: 12px;
+
+  span {
+    margin-right: $stk-space-small;
+    margin-left: auto;
+    cursor: pointer;
   }
+
 }
 
 .full-size-container {
@@ -38,7 +46,7 @@
 
   .side-navigation-header {
     display: flex;
-    padding: $stk-space-small;
+    padding: $stk-space-small $stk-space-extra-small;
     justify-content: space-between;
 
     .close-button {
@@ -58,7 +66,6 @@
   }
 
   .side-navigation-list {
-    //margin-top: $stk-space-small;
 
     .side-navigation-list-item {
       height: $stk-nav-item-height;
