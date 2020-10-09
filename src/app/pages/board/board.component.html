@@ -20,7 +20,9 @@
   <ng-template #mobileView>
     <div class="mobile-board-view">
       <ng-container *ngrxLet="storiesByStatus$ as storiesByStatus">
-        <mat-tab-group mat-stretch-tabs class="status-tab-group">
+        <mat-tab-group class="status-tab-group"
+                       disablePagination
+                       mat-stretch-tabs>
           <mat-tab *ngFor="let status of STATUS_KEYS" [label]="status | normalizeCase">
             <div class="column">
               <app-story-list [componentID]="status"
