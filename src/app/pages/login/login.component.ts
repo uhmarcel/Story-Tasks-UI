@@ -3,6 +3,7 @@ import {Store} from '@ngrx/store';
 import {OktaAuthService} from '@okta/okta-angular';
 import * as SignInWidget from '@okta/okta-signin-widget';
 import {oicdConfig} from '../../config/oicd.config';
+import {CONSTANTS} from '../../config/constants.config';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     language: 'en',
     i18n: {
       en: {
-        'primaryauth.title': 'Story Tasks Authentication',
+        'primaryauth.title': `${CONSTANTS.APP_NAME} Authentication`,
       },
     },
     features: {

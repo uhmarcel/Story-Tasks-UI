@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {AuthSelectors} from '../../store/selectors';
 import {Observable} from 'rxjs';
 import {NavigationMenuService} from '../../services/navigation-menu.service';
+import {CONSTANTS} from '../../config/constants.config';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,6 +13,8 @@ import {NavigationMenuService} from '../../services/navigation-menu.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
+
+  public readonly appTitle = CONSTANTS.APP_NAME;
 
   public user$ = this.store.pipe(
     select(AuthSelectors.selectUser)

@@ -1,7 +1,7 @@
 import {Status} from '../models';
 
 export const CONSTANTS = {
-  APP_NAME: 'Story Tasks',
+  APP_NAME: 'Stories',
   APP_OWNER: 'uhmarcel',
   APP_OWNER_LINK: 'https://github.com/uhmarcel',
   MOBILE_VIEW_BREAKPOINT: 786,

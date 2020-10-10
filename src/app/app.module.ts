@@ -21,7 +21,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {LoginComponent} from './pages/login/login.component';
 import {StoryEditorComponent} from './components/dialogs/story-editor/story-editor.component';
 import { ColorStylePipe } from './pipes/color-style/color-style.pipe';
-import {AuthComponent} from './pages/auth/auth.component';
+import {AuthComponent} from './components/auth/auth.component';
 import {storageMetaReducer} from './store/reducers/storage.metareducer';
 import { PageNavigationComponent } from './components/page-navigation/page-navigation.component';
 import { NormalizeCasePipe } from './pipes/normalize-case/normalize-case.pipe';

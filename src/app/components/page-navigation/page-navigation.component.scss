@@ -56,11 +56,12 @@
     .logo-container {
       padding: 0 $stk-space-medium;
       img {
+        margin-bottom: $stk-space-extra-small;
         width: 30px;
       }
       span {
         margin-left: $stk-space-small;
-        font-size: 0.95rem;
+        font-size: 1rem;
       }
     }
   }
