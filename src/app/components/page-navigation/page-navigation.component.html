@@ -1,6 +1,6 @@
 <mat-sidenav-container class="full-size-container">
   <mat-sidenav #sideNav
-               [mode]="sideNavMode$ | async"
+               [mode]="sideMenuMode$ | async"
                [opened]="shouldStartOpened$ | async"
                (openedChange)="menuService.toggleSideMenu($event)"
                class="side-navigation">
@@ -24,7 +24,7 @@
       <div class="divider"></div>
       <div *ngFor="let menuItem of menuService.menuItems"
            [class.isActive]="(menuService.menuTitle$ | async) === menuItem.title"
-           (click)="router.navigate([menuItem.route])"
+           (click)="navigateToItem(menuItem.route)"
            class="side-navigation-list-item">
         {{ menuItem.title }}
       </div>

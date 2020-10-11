@@ -1,10 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
 import {NavigationMenuService} from '../../services/navigation-menu.service';
-import {MatSidenav} from '@angular/material/sidenav';
+import {MatDrawerMode, MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {ResponsiveService} from '../../services/responsive.service';
 import {combineLatest, Observable} from 'rxjs';
-import {filter, first, map, tap} from 'rxjs/operators';
+import {filter, first, map, take, tap, withLatestFrom} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import {AuthActions} from '../../store/actions';
 import {CONSTANTS} from '../../config/constants.config';
@@ -22,7 +22,7 @@ export class PageNavigationComponent {
 
   @ViewChild('sideNav')
   private readonly sideNav: MatSidenav;
-  public readonly sideNavMode$: Observable<string>;
+  public readonly sideMenuMode$: Observable<MatDrawerMode>;
   public readonly shouldStartOpened$: Observable<boolean>;
 
   constructor(
@@ -36,7 +36,7 @@ export class PageNavigationComponent {
       : this.sideNav?.close()
     );
 
-    this.sideNavMode$ = this.responsiveService.isMobileView$.pipe(
+    this.sideMenuMode$ = this.responsiveService.isMobileView$.pipe(
       map(isMobile => isMobile ? 'over' : 'side')
     );
 
@@ -44,6 +44,17 @@ export class PageNavigationComponent {
       map(([isMobile, shouldDisplay]) => !isMobile && shouldDisplay),
       first()
     );
+  }
+
+  navigateToItem(route: string) {
+    this.sideMenuMode$.pipe(
+      take(1)
+    ).subscribe(menuMode => {
+      if (menuMode === 'over') {
+        this.menuService.toggleSideMenu(false);
+      }
+      this.router.navigate([route]);
+    });
   }
 
   navigateToLink(url: string) {

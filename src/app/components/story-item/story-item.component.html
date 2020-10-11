@@ -52,7 +52,9 @@
       </div>
 
       <div class="story-children" *ngIf="story.children && story.children.length > 0">
-        <app-story-list [componentID]="componentID" [storyIDs]="story.children"></app-story-list>
+        <app-story-list [componentID]="componentID"
+                        [storyIDs]="story.children"
+                        [draggable]="false"></app-story-list>
       </div>
     </div>
   </ng-template>

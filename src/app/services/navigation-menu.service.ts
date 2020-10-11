@@ -3,11 +3,12 @@ import {Store} from '@ngrx/store';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {StoryActions} from '../store/actions';
 import {NavigationEnd, Router} from '@angular/router';
-import {distinctUntilChanged, filter, map, shareReplay, tap} from 'rxjs/operators';
+import {distinctUntilChanged, filter, first, map, shareReplay, take, tap, withLatestFrom} from 'rxjs/operators';
 import {routeTitles} from '../app-routing.module';
 import {MenuAction, MenuItem} from '../models';
 import {BACKLOG_PAGE_MENU_ITEM} from '../pages/backlog/backlog.component';
 import {BOARD_PAGE_MENU_ITEM} from '../pages/board/board.component';
+import {ResponsiveService} from './responsive.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,8 @@ export class NavigationMenuService {
 
   constructor(
     private readonly store: Store,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly responsiveService: ResponsiveService
   ) {
     this.menuItems = [
       BACKLOG_PAGE_MENU_ITEM,
@@ -63,6 +65,11 @@ export class NavigationMenuService {
       ? this.setMenuTitle(routeTitles[event.urlAfterRedirects])
       : null
     );
+
+    responsiveService.isMobileView$.pipe(
+      withLatestFrom(this.isSideMenuOpen$),
+      filter(([ isMobile, isMenuOpen ]) => !!isMobile && !!isMenuOpen)
+    ).subscribe(() => this._isSideMenuOpen$.next(false));
   }
 
   setActiveMenu(menu: MenuItem) {

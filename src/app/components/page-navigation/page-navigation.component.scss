@@ -41,8 +41,7 @@
 
 .side-navigation {
   background-color: $stk-primary-color;
-  //background-color: rgb(74,74,74);
-  width: 260px;
+  width: $stk-sidenav-width;
 
   .side-navigation-header {
     display: flex;
