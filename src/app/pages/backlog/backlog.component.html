@@ -4,6 +4,7 @@
       <app-story-list
         [componentID]="'backlog'"
         [storyIDs]="storyIds$ | async"
+        [draggable]="false"
         [showStatus]="true"
       ></app-story-list>
   </div>
@@ -19,7 +20,7 @@
   </ng-template>
 
   <!-- For debug - TODO: remove when no longer needed -->
-  <div style="display: flex; justify-content: center; margin-top: 16px">
+  <div style="display: flex; justify-content: center; margin-top: 16px" *ngIf="debug">
     <button mat-button color="primary" (click)="generateRandomStory()">
       Generate
     </button>

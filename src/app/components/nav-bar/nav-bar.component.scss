@@ -40,10 +40,12 @@
 
   .nav-title {
     margin-left: $stk-space-medium;
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
-  .nav-item {}
+  .nav-item {
+    font-size: 0.95rem;
+  }
 
   .nav-account {
     border-left: 1px solid $stk-border-light !important;

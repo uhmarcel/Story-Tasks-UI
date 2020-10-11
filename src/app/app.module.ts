@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig, HammerModule, Title} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +25,7 @@ import {AuthComponent} from './components/auth/auth.component';
 import {storageMetaReducer} from './store/reducers/storage.metareducer';
 import { PageNavigationComponent } from './components/page-navigation/page-navigation.component';
 import { NormalizeCasePipe } from './pipes/normalize-case/normalize-case.pipe';
+import {HammerConfig} from './config/hammerjs.config';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,10 @@ import { NormalizeCasePipe } from './pipes/normalize-case/normalize-case.pipe';
       metaReducers: [storageMetaReducer]
     })
   ],
-  providers: [],
+  providers: [
+    Title,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

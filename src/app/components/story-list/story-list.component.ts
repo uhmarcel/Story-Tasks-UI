@@ -15,6 +15,7 @@ export class StoryListComponent implements OnInit, OnChanges {
   @Input() public readonly componentID: string;
   @Input() public readonly storyIDs: number[];
   @Input() public readonly showStatus = true;
+  @Input() public readonly draggable = true;
 
   public readonly sortedIDs$: Observable<number[]>;
   private readonly inputIDs$: BehaviorSubject<number[]>;
@@ -55,6 +56,10 @@ export class StoryListComponent implements OnInit, OnChanges {
     if (changes.storyIDs && changes.storyIDs.currentValue) {
       this.inputIDs$.next(changes.storyIDs.currentValue);
     }
+  }
+
+  log(event) {
+    console.log(event);
   }
 
 }

@@ -1,7 +1,8 @@
 <div class="page-container">
 
   <ng-container *ngIf="!(responsiveService.isMobileView$ | async); else mobileView">
-    <div class="desktop-board-view" cdkDropListGroup>
+    <div class="desktop-board-view"
+         cdkDropListGroup>
       <ng-container *ngrxLet="storiesByStatus$ as storiesByStatus">
         <div *ngFor="let status of STATUS_KEYS"
              class="column"
@@ -10,7 +11,8 @@
              [cdkDropListData]="status">
           <app-story-list [componentID]="status"
                           [storyIDs]="storiesByStatus[status]"
-                          [showStatus]="false">
+                          [showStatus]="false"
+                          [draggable]="true">
           </app-story-list>
         </div>
       </ng-container>
@@ -23,11 +25,13 @@
         <mat-tab-group class="status-tab-group"
                        disablePagination
                        mat-stretch-tabs>
-          <mat-tab *ngFor="let status of STATUS_KEYS" [label]="status | normalizeCase">
+          <mat-tab *ngFor="let status of STATUS_KEYS"
+                   [label]="status | normalizeCase">
             <div class="column">
               <app-story-list [componentID]="status"
                               [storyIDs]="storiesByStatus[status]"
-                              [showStatus]="false">
+                              [showStatus]="false"
+                              [draggable]="false">
               </app-story-list>
             </div>
           </mat-tab>

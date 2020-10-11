@@ -17,6 +17,7 @@ import {easeIn} from '../../styles/animations';
 })
 export class StoryItemComponent implements OnInit {
 
+  // TODO: Make all input observables
   @Input() public readonly containerID: string;
   @Input() public readonly storyID: number;
   @Input() public readonly showStatus = true;

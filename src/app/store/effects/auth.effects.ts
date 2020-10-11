@@ -36,7 +36,6 @@ export class AuthEffects {
   authChangeOut$ = createEffect(() =>
     this.authService.$authenticationState.pipe(
      filter(isAuthenticated => isAuthenticated === false),
-     tap(x => console.log('>> THIS ACTUALLY DOES SOMETHING <<')),
      map(AuthActions.signOut),
      catchError((error) => of(AuthActions.signOut))
     )

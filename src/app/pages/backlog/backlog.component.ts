@@ -4,6 +4,7 @@ import {select, Store} from '@ngrx/store';
 import {AuthSelectors, StoryComponentSelectors, StorySelectors} from '../../store/selectors';
 import {StoryActions} from '../../store/actions';
 import {CONSTANTS} from '../../config/constants.config';
+import {environment} from '../../../environments/environment';
 
 export const BACKLOG_PAGE_MENU_ITEM: MenuItem = {
   route: '/backlog',
@@ -16,6 +17,8 @@ export const BACKLOG_PAGE_MENU_ITEM: MenuItem = {
   styleUrls: ['./backlog.component.scss']
 })
 export class BacklogComponent {
+
+  public readonly debug = !environment.production;
 
   public readonly storyIds$ = this.store.pipe(
     select(StorySelectors.selectStoryIDsByParentID(CONSTANTS.NO_PARENT))
