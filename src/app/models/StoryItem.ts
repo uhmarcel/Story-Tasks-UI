@@ -1,4 +1,8 @@
-import {Identifier, Priority, Size, Status, statusMap, Task} from './';
+import { Identifier } from './common/Identifier';
+import { Priority } from './common/Priority';
+import { Size } from './common/Size';
+import { Status, statusMap } from './common/Status';
+import { Task } from './common/Task';
 
 export interface StoryItem {
   identifier: Identifier;
