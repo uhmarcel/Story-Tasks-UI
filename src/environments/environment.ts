@@ -1,6 +1,7 @@
+import { NG_ENV } from 'angular-server-side-configuration/ng-env';
+
 export const environment = {
   production: false,
-  backendUrl: 'http://192.168.1.245:8080',
-  baseHref: '/',
-
+  backendUrl: NG_ENV.BACKEND_URL || 'http://localhost:8080',
+  baseHref: NG_ENV.BASE_HREF || '/'
 };

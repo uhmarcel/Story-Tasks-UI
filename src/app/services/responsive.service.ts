@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
-import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
-import {distinctUntilChanged, map, shareReplay} from 'rxjs/operators';
-import {CONSTANTS} from '../config/constants.config';
+import { Observable } from 'rxjs';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { distinctUntilChanged, map, shareReplay } from 'rxjs/operators';
+import { CONSTANTS } from '../config/constants.config';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ResponsiveService {
-
   public readonly isMobileView$: Observable<boolean>;
 
   constructor(private readonly breakpointObserver: BreakpointObserver) {

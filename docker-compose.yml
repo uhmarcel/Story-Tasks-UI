@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  frontend:
+    image: 'uhmarcel/story-tasks-ui:latest'
+    container_name: story-tasks-ui
+    restart: always
+    ports:
+      - '4200:80'
+    environment:
+      - BACKEND_URL=http://127.0.0.1:8080
+    networks:
+      - front
+
+  backend:
+    image: 'uhmarcel/story-tasks-api:latest'
+    container_name: story-tasks-api
+    environment:
+      - OKTA_OAUTH2_VAL_ISSUER=${OKTA_OAUTH2_VAL_ISSUER}
+      - OKTA_OAUTH2_VAL_CLIENT_ID=${OKTA_OAUTH2_VAL_CLIENT_ID}
+      - OKTA_OAUTH2_VAL_CLIENT_SECRET=${OKTA_OAUTH2_VAL_CLIENT_SECRET}
+      - DATABASE_URL=mongodb://mongo:27017/story-tasks
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mongo
+    networks:
+      - back
+
+  mongo:
+    image: 'mongo:latest'
+    container_name: mongodb
+    networks:
+      - front
+      - back
+
+networks:
+  front:
+  back:
