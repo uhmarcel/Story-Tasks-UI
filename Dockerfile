@@ -3,7 +3,7 @@ COPY package.json package-lock.json ./
 RUN npm install && mkdir /app && mv ./node_modules ./app
 WORKDIR /app
 COPY . .
-RUN  node --max_old_space_size=1536 ./node_modules/@angular/cli/bin/ng build --prod
+RUN  node --max_old_space_size=1024 ./node_modules/@angular/cli/bin/ng run story-tasks-ui:ngsscbuild:production
 
 FROM nginx:alpine
 ADD https://github.com/kyubisation/angular-server-side-configuration/releases/download/v11.0.2/ngssc_64bit /usr/sbin/ngssc
