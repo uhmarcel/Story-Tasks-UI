@@ -25,6 +25,11 @@ import { AuthComponent } from './components/auth/auth.component';
 import { storageMetaReducer } from './store/reducers/storage.metareducer';
 import { PageNavigationComponent } from './components/page-navigation/page-navigation.component';
 import { NormalizeCasePipe } from './pipes/normalize-case/normalize-case.pipe';
+import {ConfigService} from './services/config.service';
+
+const runtimeConfig = (configService: ConfigService) => {
+  return () => configService.loadAppConfig();
+};
 
 @NgModule({
   declarations: [
@@ -56,6 +61,15 @@ import { NormalizeCasePipe } from './pipes/normalize-case/normalize-case.pipe';
     StoreModule.forRoot(applicationReducers, {
       metaReducers: [storageMetaReducer],
     }),
+  ],
+  providers: [
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: runtimeConfig,
+      multi: true,
+      deps: [ConfigService]
+    }
   ],
   bootstrap: [AppComponent],
 })

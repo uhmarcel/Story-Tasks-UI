@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng run story-tasks-ui:ngsscbuild:production",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -28,7 +28,6 @@
     "@okta/okta-angular": "^2.2.0",
     "@okta/okta-signin-widget": "^4.4.4",
     "@types/faker": "^5.1.0",
-    "angular-server-side-configuration": "^11.0.2",
     "deepmerge": "^4.2.2",
     "faker": "^5.1.0",
     "lodash": "^4.17.20",

@@ -14,19 +14,6 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-        "ngsscbuild": {
-          "builder": "angular-server-side-configuration:ngsscbuild",
-          "options": {
-            "additionalEnvironmentVariables": [],
-            "browserTarget": "story-tasks-ui:build",
-            "ngsscEnvironmentFile": "src/environments/environment.prod.ts"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "story-tasks-ui:build:production"
-            }
-          }
-        },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {

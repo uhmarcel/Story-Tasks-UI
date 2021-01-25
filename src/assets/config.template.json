@@ -1,0 +1,4 @@
+{
+  "backendUrl": "${BACKEND_URL}",
+  "baseHref": "${BASE_HREF}"
+}

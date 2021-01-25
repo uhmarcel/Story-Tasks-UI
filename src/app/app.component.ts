@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer, Title} from '@angular/platform-browser';
-import {Store} from '@ngrx/store';
-import {StoryState} from './store/reducers/story.reducer';
-import {loadStoryItems} from './store/actions/story.actions';
-import {tap} from 'rxjs/operators';
 import {CONSTANTS} from './config/constants.config';
 import {Priority} from './models';
 

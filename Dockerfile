@@ -3,13 +3,9 @@ COPY package.json package-lock.json ./
 RUN npm install && mkdir /app && mv ./node_modules ./app
 WORKDIR /app
 COPY . .
-RUN  node --max_old_space_size=1024 ./node_modules/@angular/cli/bin/ng run story-tasks-ui:ngsscbuild:production
+RUN  node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build
 
 FROM nginx:alpine
-ADD https://github.com/kyubisation/angular-server-side-configuration/releases/download/v11.0.2/ngssc_64bit /usr/sbin/ngssc
-RUN chmod +x /usr/sbin/ngssc
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist/story-tasks-ui /usr/share/nginx/html
-COPY start.sh start.sh
-RUN chmod +x ./start.sh
-CMD ["./start.sh"]
+CMD ["/bin/sh",  "-c",  "envsubst < /usr/share/nginx/html/assets/config.template.json > /usr/share/nginx/html/assets/config.json && exec nginx -g 'daemon off;'"]
