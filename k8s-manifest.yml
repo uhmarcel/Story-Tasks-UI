@@ -14,7 +14,7 @@ spec:
     - name: entry
       port: 80
       targetPort: 80
-      nodePort: 30002
+      nodePort: 30001
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -35,15 +35,15 @@ spec:
     spec:
       containers:
         - name: story-tasks-ui
-          image: uhmarcel/story-tasks-ui:latest
+          image: uhmarcel/story-tasks-ui:0.17.9
           env:
             - name: BACKEND_URL
-              value: http://${STORY_TASKS_API_SERVICE_HOST}:8080
+              value: http://$(STORY_TASKS_API_SERVICE_HOST):8080
           ports:
             - containerPort: 80
           resources:
             requests:
-              memory: "128Mi"
+              memory: "256Mi"
               cpu: "250m"
             limits:
               memory: "512Mi"
