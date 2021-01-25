@@ -5,7 +5,6 @@ metadata:
   namespace: uhmarcel
   labels:
     name: story-tasks
-
 spec:
   type: NodePort
   selector:
