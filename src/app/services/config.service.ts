@@ -10,16 +10,15 @@ export class ConfigService {
   constructor(private http: HttpClient) { }
 
   loadAppConfig() {
-    return this.http.get('/assets/config.json').pipe(
-      tap(data => console.log(data))
-    )
+    return this.http.get('/assets/config.json')
       .toPromise()
       .then(data => {
         this.config = data;
       });
   }
 
-  getConfig(key: string) {
+  getConfig(key: string): string {
+    console.log(this.config)
     return this.config && this.config[key]
       ? this.config[key]
       : environment[key];

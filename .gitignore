@@ -6,6 +6,7 @@
 /out-tsc
 
 # secrets
+src/assets/config.json
 .env
 
 # Only exists if Bazel was run
